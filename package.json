@@ -1,0 +1,9 @@
+{
+  "name": "type-dojo",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "An offline-first Pokémon type effectiveness learning tool.",
+  "scripts": { "start": "node server.js", "test": "node tests/chart.test.js" },
+  "engines": { "node": ">=20" }
+}
