@@ -65,6 +65,25 @@ const memories = {
  'Normal>Ghost':'An ordinary punch passes through a ghost.', 'Fighting>Ghost':'You cannot punch a spirit.', 'Ghost>Normal':'Picture the normal world ignoring a haunting.',
  'Electric>Ground':'The ground safely carries away the charge: zero damage.', 'Ground>Flying':'An earthquake cannot hit something in the air.', 'Psychic>Dark':'A dark mind blocks psychic tricks.', 'Poison>Steel':'Metal cannot be poisoned.', 'Dragon>Fairy':'A fairy’s magic completely blocks a dragon’s attack.'
 };
+const resistanceMemories = {
+ 'Normal>Rock':'An ordinary hit barely dents a boulder.', 'Normal>Steel':'An everyday attack bounces off metal armor.',
+ 'Fire>Fire':'Adding a flame to a bonfire does not bother it much.', 'Fire>Water':'Water douses the incoming flame.', 'Fire>Rock':'A stone fireplace withstands the heat.', 'Fire>Dragon':'A fire-breathing dragon is used to heat.',
+ 'Water>Water':'A splash disappears into a pool.', 'Water>Grass':'A thirsty plant drinks up the splash.', 'Water>Dragon':'Picture an ancient dragon shrugging off a splash.',
+ 'Electric>Electric':'An electric creature is already charged up.', 'Electric>Grass':'Imagine a plant wrapped in insulating leaves.', 'Electric>Dragon':'Picture a dragon’s scales shrugging off a little lightning spark.',
+ 'Grass>Fire':'Leaves burn up before they can bother a flame.', 'Grass>Grass':'Plants tangle together without doing much harm.', 'Grass>Poison':'Toxic sludge makes incoming leaves wilt.', 'Grass>Flying':'A bird rises above the tangled plants.', 'Grass>Bug':'The bug eats the leaves sent its way.', 'Grass>Dragon':'A mighty dragon shrugs off a handful of leaves.', 'Grass>Steel':'Soft leaves cannot dent metal armor.',
+ 'Ice>Fire':'Fire melts the incoming ice. This resistance begins in Generation II.', 'Ice>Water':'Picture an ice cube melting into a larger pool.', 'Ice>Ice':'An icy creature is already used to the cold.', 'Ice>Steel':'Imagine a steel shield stopping flying ice shards.',
+ 'Fighting>Poison':'Picture toxic fumes weakening a fighter’s punch.', 'Fighting>Flying':'A bird dodges a punch by flying higher.', 'Fighting>Psychic':'A focused mind anticipates a fighter’s punch.', 'Fighting>Bug':'A tiny bug is a difficult punching target.', 'Fighting>Fairy':'Picture a magical charm softening a punch.',
+ 'Poison>Poison':'A poisonous creature is already used to toxins.', 'Poison>Ground':'Picture soil absorbing a toxic spill.', 'Poison>Rock':'Imagine poison sliding off a stone wall.', 'Poison>Ghost':'A spirit has little physical body for poison to harm.',
+ 'Ground>Grass':'Roots hold soil together against an earth attack.', 'Ground>Bug':'Picture a burrowing bug comfortable in shifting soil.',
+ 'Flying>Electric':'A bird has trouble flying through a lightning storm.', 'Flying>Rock':'A solid cliff withstands wind and wings.', 'Flying>Steel':'Metal armor withstands a wing strike.',
+ 'Psychic>Psychic':'A trained mind recognizes another mind’s tricks.', 'Psychic>Steel':'Imagine a metal helmet shielding the mind.',
+ 'Bug>Fire':'An attacking bug hesitates at the heat.', 'Bug>Fighting':'Picture a fighter brushing an insect aside.', 'Bug>Poison':'A toxic cloud holds off attacking bugs. This resistance starts in Generation II.', 'Bug>Flying':'A bird snaps up an incoming bug.', 'Bug>Ghost':'Picture a bug’s bite slipping through a spirit.', 'Bug>Steel':'A little bite barely dents metal.', 'Bug>Fairy':'Imagine a magical forest charming its bugs into calm.',
+ 'Rock>Fighting':'A fighter breaks the incoming stone.', 'Rock>Ground':'The earth absorbs a falling rock.', 'Rock>Steel':'A steel shield stops the stone.',
+ 'Ghost>Dark':'Imagine darkness swallowing an incoming haunting.', 'Dragon>Steel':'A dragon’s claws scrape against a steel shield.',
+ 'Dark>Fighting':'A disciplined fighter resists dirty tricks.', 'Dark>Dark':'A sneaky creature already knows those tricks.', 'Dark>Fairy':'A fairy’s light holds back dark tricks.',
+ 'Steel>Fire':'A furnace softens the incoming metal.', 'Steel>Water':'Picture water cushioning a falling metal blade.', 'Steel>Electric':'Imagine a magnet holding back a metal weapon.', 'Steel>Steel':'Two metal shields clash with little advantage.',
+ 'Fairy>Fire':'Imagine a flame burning through a delicate enchantment.', 'Fairy>Poison':'Toxic sludge spoils a fairy’s magic.', 'Fairy>Steel':'Iron armor wards off a fairy’s spell.'
+};
 export function mnemonic(attack,defend,era='6') {
   const value=effectiveness(attack,defend,era);
   if(era==='1'&&attack==='Ghost'&&defend==='Psychic') return 'An original-game quirk: Ghost passes straight through Psychic. Trust the game’s 0× rule, even though later games reverse it.';
@@ -72,6 +91,7 @@ export function mnemonic(attack,defend,era='6') {
   if(era==='2'&&['Ghost','Dark'].includes(attack)&&defend==='Steel') return 'Old steel armor blocks spooky shadows. Steel resists Ghost and Dark only in Generations II–V.';
   if(value===2||value===0) return memories[`${attack}>${defend}`]||`${attack} deals ${multiplier(value)} damage to ${defend}.`;
   if(value===.5) {
+    if(resistanceMemories[`${attack}>${defend}`]) return `${resistanceMemories[`${attack}>${defend}`]} ${defend} takes half damage from ${attack}.`;
     const reverse=memories[`${defend}>${attack}`];
     return reverse&&effectiveness(defend,attack,era)===2?`${reverse} Here, ${defend} also withstands ${attack}: half damage.`:`Picture ${defend} wearing a shield labeled “${attack}”: this attack does half damage. Memorize this direction; resistance is not always mutual.`;
   }
