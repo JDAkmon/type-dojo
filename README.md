@@ -26,6 +26,16 @@ The app has no dependencies and makes no external requests. Everything works wit
 - **Matchup chart:** complete interactive chart plus a dual-type calculator. Rows attack; columns defend.
 - **My progress:** XP, accuracy, mastery, explored cells, training days, and personal review queue. Export/import JSON backups, or reset one era.
 
+## A Pokémon adventure
+
+The interface features animated Pokémon sprites, an original pixel-art Route 01 meadow, illustrated lesson cards, a battle field, and species spotlights in the type library. Choose Pikachu, Bulbasaur, Charmander, Squirtle, or Eevee as your study buddy; your choice is saved on this device.
+
+Use the sun/moon button in the header to pause or resume animations. System reduced-motion preferences automatically use still sprites. Both animated GIFs and still PNGs are bundled locally, so the app still works offline with no third-party image requests.
+
+Defending sprites always match the **complete typing** in the question. When no matching species is bundled, a clearly labeled practice target shows the required type or types. The attacking Pokémon demonstrates the move type; its own typing is not used to calculate the answer. Species availability follows the selected chart era, and historical changes such as Clefairy's Normal-to-Fairy typing and Magnemite's added Steel typing are handled explicitly. Sprite artwork uses a consistent Generation V style across all eras.
+
+Sprite credits, original download URLs, and the source repository's notice are preserved in [assets/ATTRIBUTION.md](assets/ATTRIBUTION.md).
+
 ## Chart eras
 
 | Rules | Available types | Significant differences |
@@ -53,7 +63,11 @@ src/data.js         Chart rules, generation overrides, mnemonics, lessons
 src/progress.js     Adaptive sessions, mastery, save validation
 src/app.js          UI and interaction flows
 src/styles.css      Responsive interface and reduced-motion support
+src/pokemon-theme.css Pokémon scenery, sprite layout, and battle styling
+src/pokemon.js      Species typings, era-aware examples, and sprite selection
+assets/            Local sprite images, source credits, and original scenery
 tests/chart.test.js Historical chart fixtures and learning-system checks
+tests/pokemon.test.js Sprite availability and complete defender-typing checks
 ```
 
 ## Sources
@@ -74,4 +88,4 @@ git remote add origin YOUR_GITHUB_REPOSITORY_URL
 git push -u origin main
 ```
 
-This is an unofficial fan learning tool. Pokémon and associated names are trademarks of their respective owners. The interface artwork is created for this project; no official character artwork is bundled.
+This is an unofficial fan learning tool. Pokémon images, names, and associated trademarks belong to their respective owners. Pokémon sprites are sourced from PokéAPI; the pixel-art scenery and interface decorations were created for this project. See [sprite attribution](assets/ATTRIBUTION.md) for details.

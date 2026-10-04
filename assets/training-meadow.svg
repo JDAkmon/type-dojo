@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 380" shape-rendering="crispEdges">
+  <defs>
+    <pattern id="grass" width="32" height="32" patternUnits="userSpaceOnUse"><rect width="32" height="32" fill="#9cd574"/><path d="M4 15h3v3h3v3H7v-3H4Zm17 10h3v-3h3v3h-3v3h-3Z" fill="#84c15e" opacity=".6"/></pattern>
+    <pattern id="water" width="32" height="24" patternUnits="userSpaceOnUse"><rect width="32" height="24" fill="#72c6dd"/><path d="M3 6h12v2H3Zm19 14h8v2h-8" fill="#a3e5ee"/></pattern>
+    <g id="tree"><path d="M24 55h12v21H24Z" fill="#9a7750"/><path d="M30 61h6v15h-6Z" fill="#785c43"/><path d="M18 0h24v6h6v6h6v12h6v24h-6v6h-6v6H12v-6H6v-6H0V24h6V12h6V6h6Z" fill="#4b9470"/><path d="M18 5h24v6h6v7h6v16h-6v8H12v-8H6V18h6v-7h6Z" fill="#68b67b"/><path d="M18 10h18v6H18Zm-6 9h6v12h-6Zm24 15h12v6H36Z" fill="#8ccd8a"/><path d="M6 42h6v6h36v-6h6v6h-6v6H12v-6H6Z" fill="#367958"/></g>
+    <g id="flower"><path d="M4 10h2v8H4" fill="#558d5a"/><path d="M2 2h6v2h2v6H8v2H2v-2H0V4h2" fill="#fff9d0"/><path d="M3 5h4v4H3" fill="#eab456"/></g>
+    <g id="bush"><path d="M5 0h24v5h5v15H0V5h5" fill="#65af6f"/><path d="M7 3h17v4H7Zm-3 5h4v8H4" fill="#84c888"/></g>
+  </defs>
+  <rect width="560" height="380" fill="#c2e9ed"/>
+  <path d="M0 86h35V72h28V56h35V40h27v14h28v17h26v21h36v19H0Z" fill="#a0d2b5"/>
+  <path d="M339 105V86h26V67h31V50h35V38h25v15h32v21h34v18h38v39Z" fill="#a0d2b5"/>
+  <path d="M0 101h60V87h59V74h34v22h62v11h78v-9h68V87h46V75h39v19h59v13h55v74H0Z" fill="#80bd89"/>
+  <path d="M54 23h12V13h33v10h15v13H54Zm326-8h14V5h32v10h19v14h-65Z" fill="#f8fcf0"/>
+  <rect y="119" width="560" height="261" fill="url(#grass)"/>
+  <path d="M198 380V284h27v-37h22V200h56v47h30v29h43v39h70v65Z" fill="#ecdfac"/>
+  <path d="M207 380V289h28v-36h22v-40h35v39h31v30h43v40h70v58Z" fill="#f9edc7"/>
+  <path d="M0 296h30v-24h50v-14h68v14h19v62h-16v29h-30v17H0Z" fill="#e9df9f"/>
+  <path d="M0 306h38v-24h50v-14h51v14h18v43h-16v29h-32v26H0Z" fill="url(#water)"/>
+  <path d="M7 338h20v3H7Zm57-35h24v3H64Zm41 42h19v3h-19Z" fill="#b6e9f0"/>
+  <use href="#tree" x="3" y="97"/><use href="#tree" x="52" y="118"/><use href="#tree" x="94" y="86"/>
+  <use href="#tree" x="476" y="85"/><use href="#tree" x="520" y="116"/><use href="#tree" x="428" y="121"/>
+  <path d="M221 135h102v73H221Z" fill="#faf5df"/><path d="M309 143h14v65h-14Z" fill="#e8ddb4"/>
+  <path d="M204 128h15v-15h15V98h77v15h15v15h15v18H204Z" fill="#cf6560"/>
+  <path d="M211 129h15v-14h15v-10h63v10h15v14h15v10H211Z" fill="#ef8170"/>
+  <path d="M211 139h123v7H211Z" fill="#b85655"/>
+  <path d="M251 171h36v37h-36Z" fill="#6c826f"/><path d="M257 178h24v30h-24Z" fill="#9bbaa4"/>
+  <path d="M229 158h16v20h-16Zm64 0h16v20h-16Z" fill="#93ccd2"/><path d="M229 165h16v3h-16Zm7-7h3v20h-3Zm57 7h16v3h-16Zm7-7h3v20h-3Z" fill="#fdf8df"/>
+  <path d="M251 209h36v5h-36Z" fill="#d9c69c"/><path d="M245 214h48v6h-48Z" fill="#d9c69c"/>
+  <path d="M262 115h14v4h4v14h-4v4h-14v-4h-4v-14h4Z" fill="#fff8e8"/>
+  <path d="M258 125h22v3h-22Zm8-4h6v10h-6" fill="#b95855"/>
+  <path d="M268 124h2v4h-2" fill="#fff8e8"/>
+  <path d="M181 173h7v34h-7" fill="#9c7c57"/><path d="M157 157h56v22h-56Z" fill="#f6e9c0"/><path d="M161 162h48v12h-48Z" fill="#71997a"/>
+  <path d="M348 182h9v30h-9" fill="#9c7c57"/><path d="M335 162h36v24h-36Z" fill="#fff7db"/><path d="M341 168h24v4h-24Zm0 8h17v4h-17" fill="#bc9b5d"/>
+  <use href="#bush" x="203" y="213"/><use href="#bush" x="304" y="210"/>
+  <use href="#tree" x="381" y="222"/><use href="#tree" x="466" y="243"/>
+  <use href="#bush" x="18" y="222"/><use href="#bush" x="48" y="228"/><use href="#bush" x="130" y="180"/>
+  <use href="#flower" x="175" y="245"/><use href="#flower" x="165" y="261"/><use href="#flower" x="181" y="264"/>
+  <use href="#flower" x="366" y="205"/><use href="#flower" x="379" y="195"/><use href="#flower" x="492" y="348"/>
+  <path d="M72 365h5v-9h5v9h5v4H72Zm385-38h5v-10h5v10h5v4h-15Zm-83 35h5v-10h5v10h5v4h-15Zm-256-36h4v-8h4v8h4v4h-12" fill="#63a160"/>
+  <path d="M0 371h18v9H0Zm25 0h24v9H25Zm29 0h26v9H54Zm420-13h12v22h-12Zm20 0h12v22h-12Zm20 0h12v22h-12Zm20 0h12v22h-12Z" fill="#e5dfb5"/>
+  <path d="M470 362h90v5h-90" fill="#e5dfb5"/>
+</svg>
