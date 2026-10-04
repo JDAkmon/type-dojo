@@ -1,6 +1,24 @@
 import { ERAS, typesFor, pairsFor, dualEffectiveness, LESSONS } from './data.js';
 export const STORAGE_KEY='type-dojo-v1';
 export const freshState=()=>({version:1,era:'6',eras:{'1':{records:{},lessons:[],xp:0,days:[]},'2':{records:{},lessons:[],xp:0,days:[]},'6':{records:{},lessons:[],xp:0,days:[]}}});
+export function resetProgress(state,era,scope='lessons'){
+  if(!ERAS[era]||!['lessons','era'].includes(scope))throw new Error('Choose a valid reset scope.');
+  const backup={era,scope,bucket:structuredClone(state.eras[era])};
+  if(scope==='lessons')state.eras[era].lessons=[];
+  else state.eras[era]=freshState().eras[era];
+  return backup;
+}
+export function validateResetBackup(backup){
+  if(!backup||!ERAS[backup.era]||!['lessons','era'].includes(backup.scope))throw new Error('Invalid reset backup.');
+  const check=freshState();check.eras[backup.era]=backup.bucket;
+  const clean=validateState(check);
+  return {era:backup.era,scope:backup.scope,bucket:clean.eras[backup.era]};
+}
+export function restoreProgress(state,snapshot){
+  const backup=validateResetBackup(snapshot);
+  if(backup.scope==='lessons')state.eras[backup.era].lessons=backup.bucket.lessons;
+  else state.eras[backup.era]=backup.bucket;
+}
 export const mastered=r=>!!r&&r.streak>=3;
 export const due=(r,now=Date.now())=>!!r&&(r.streak===0||r.due<=now);
 export function recordAnswer(bucket,key,correct,assisted=false,now=Date.now()) {

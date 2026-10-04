@@ -1,5 +1,7 @@
 import './pokemon.test.js';
 import './moves.test.js';
+import './reset.test.js';
+import './sound.test.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {typesFor,pairsFor,effectiveness,dualEffectiveness,mnemonic,LESSONS} from '../src/data.js';

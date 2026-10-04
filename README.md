@@ -30,6 +30,8 @@ The app has no dependencies and makes no external requests. Everything works wit
 
 The interface features animated Pokémon sprites, an original pixel-art Route 01 meadow, illustrated lesson cards, a battle field, and species spotlights in the type library. Choose Pikachu, Bulbasaur, Charmander, Squirtle, or Eevee as your study buddy; your choice is saved on this device.
 
+Soft, original musical cues accompany starting practice, choosing a buddy, answers, and finishing a session. They start at 25% volume and play only after your interaction. There is no background music, autoplay, or hover audio. Use **Sound on/off** in the header to mute instantly; the adjacent arrow opens **Sound settings**, with a volume slider and a preview. Preferences persist on this device. The browser synthesizes the sounds locally; no audio downloads are required. Cues fade gently, repeated clicks are throttled, and sound stops when the page is hidden.
+
 Use the sun/moon button in the header to pause or resume animations. System reduced-motion preferences automatically use still sprites. Both animated GIFs and still PNGs are bundled locally, so the app still works offline with no third-party image requests.
 
 Defending sprites always match the **complete typing** in the question. When no matching species is bundled, a clearly labeled practice target shows the required type or types. The attacking Pokémon uses a verified move, and the sprites face each other. Type badges, library selectors, and chart headings use Pokémon sprite pictograms. Multiplier cards have distinct hover and keyboard-focus colors. The attacking Pokémon demonstrates the move type; its own typing is not used to calculate the answer. Species availability follows the selected chart era, and historical changes such as Clefairy's Normal-to-Fairy typing and Magnemite's added Steel typing are handled explicitly. Sprite artwork uses a consistent Generation V style across all eras.
@@ -49,6 +51,15 @@ Sprite credits, original download URLs, and the source repository's notice are p
 | Generation VI onward | 18 standard types | Fairy added. Ghost and Dark attacks become neutral against Steel. |
 
 Remakes follow the generation in which the remake was released. For example, FireRed uses the II–V chart; Brilliant Diamond uses the VI+ chart. This tool teaches base main-series type effectiveness, not Pokémon GO or the card game. It excludes damage stats, STAB, abilities, special move overrides, weather, transformations, and Generation IX's special Stellar Terastallization rules. Dual-type answers multiply the two chart values; any zero makes the result zero. Mnemonics are imaginative memory cues, not real-world science.
+
+## Restart your journey
+
+“Continue your journey” depends on completed Ground Zero chapters for the selected game era. On **Overview**, choose **Restart journey** below the study-buddy picker:
+
+- **Ground Zero lessons only** clears completed chapters and returns the journey button to **Start from Ground Zero**, retaining practice answers, mastery, reviews, XP, and training days.
+- **All progress in this era** clears all of the above for the selected era. The same choice is available through **My progress → Reset this era**.
+
+Both choices preserve the other game eras and your study buddy/settings. **Undo last reset** restores the most recent saved copy, even after refreshing. Undoing a lessons-only restart preserves practice earned since the restart. Undoing a full era reset replaces any new progress in that era with the pre-reset copy; its confirmation explains this. Export a backup from My progress if you want to retain multiple snapshots. Progress changes sync between open tabs of the same origin.
 
 ## Progress model
 
@@ -71,10 +82,14 @@ src/pokemon-theme.css Pokémon scenery, sprite layout, and battle styling
 src/pokemon.js      Species typings, era-aware examples, and sprite selection
 src/move-examples.js Verified species-specific move examples for each chart era
 src/move-ui.css     Sprite type pictograms, directional battles, and card hover colors
+src/sound.js        Gentle synthesized cues, mute, volume, and playback limits
+src/sound-journey.css Sound controls and restart journey styling
 assets/            Local sprite images, source credits, and original scenery
 tests/chart.test.js Historical chart fixtures and learning-system checks
 tests/pokemon.test.js Sprite availability and complete defender-typing checks
 tests/moves.test.js Learnset, game-era, and fixed-damage exception checks
+tests/reset.test.js Scoped resets, persistent undo, and preservation of other eras
+tests/sound.test.js Quiet playback, mute, visibility, and audio failure handling
 assets/data/move-evidence.json Extracted source evidence for offline verification
 ```
 
