@@ -3,6 +3,7 @@ export const POKEMON = [
   [1,'Bulbasaur',['Grass','Poison'],1], [4,'Charmander',['Fire'],1],
   [6,'Charizard',['Fire','Flying'],1], [7,'Squirtle',['Water'],1],
   [10,'Caterpie',['Bug'],1], [12,'Butterfree',['Bug','Flying'],1],
+  [15,'Beedrill',['Bug','Poison'],1],
   [16,'Pidgey',['Normal','Flying'],1], [23,'Ekans',['Poison'],1],
   [25,'Pikachu',['Electric'],1], [35,'Clefairy',['Fairy'],1],
   [50,'Diglett',['Ground'],1], [63,'Abra',['Psychic'],1],

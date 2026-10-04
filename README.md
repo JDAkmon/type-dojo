@@ -32,7 +32,11 @@ The interface features animated Pokémon sprites, an original pixel-art Route 01
 
 Use the sun/moon button in the header to pause or resume animations. System reduced-motion preferences automatically use still sprites. Both animated GIFs and still PNGs are bundled locally, so the app still works offline with no third-party image requests.
 
-Defending sprites always match the **complete typing** in the question. When no matching species is bundled, a clearly labeled practice target shows the required type or types. The attacking Pokémon demonstrates the move type; its own typing is not used to calculate the answer. Species availability follows the selected chart era, and historical changes such as Clefairy's Normal-to-Fairy typing and Magnemite's added Steel typing are handled explicitly. Sprite artwork uses a consistent Generation V style across all eras.
+Defending sprites always match the **complete typing** in the question. When no matching species is bundled, a clearly labeled practice target shows the required type or types. The attacking Pokémon uses a verified move, and the sprites face each other. Type badges, library selectors, and chart headings use Pokémon sprite pictograms. Multiplier cards have distinct hover and keyboard-focus colors. The attacking Pokémon demonstrates the move type; its own typing is not used to calculate the answer. Species availability follows the selected chart era, and historical changes such as Clefairy's Normal-to-Fairy typing and Magnemite's added Steel typing are handled explicitly. Sprite artwork uses a consistent Generation V style across all eras.
+
+Training battles name an actual move and show its source game and learning method. Open that note for the species-specific learnset and move-type sources. The 49 examples are checked against PokéAPI data for the exact species (not its evolution), game, move type, and introduction generation. Games sharing a type chart can have different learnsets: Squirtle uses Bubble Beam via TM in Red/Blue, Water Gun at level 13 in Black 2/White 2, and Bubble Beam at level 27 in Let's Go. These are named game examples, not availability claims for every game in an era.
+
+Generation I Dragon questions explicitly practice the chart without an actual move: the only Dragon move then, Dragon Rage, deals a fixed 40 HP and cannot correctly illustrate the usual damage multipliers. Other training move examples use standard type effectiveness; exercises isolate that multiplier from power, stats, STAB, abilities, and secondary effects.
 
 Sprite credits, original download URLs, and the source repository's notice are preserved in [assets/ATTRIBUTION.md](assets/ATTRIBUTION.md).
 
@@ -65,13 +69,18 @@ src/app.js          UI and interaction flows
 src/styles.css      Responsive interface and reduced-motion support
 src/pokemon-theme.css Pokémon scenery, sprite layout, and battle styling
 src/pokemon.js      Species typings, era-aware examples, and sprite selection
+src/move-examples.js Verified species-specific move examples for each chart era
+src/move-ui.css     Sprite type pictograms, directional battles, and card hover colors
 assets/            Local sprite images, source credits, and original scenery
 tests/chart.test.js Historical chart fixtures and learning-system checks
 tests/pokemon.test.js Sprite availability and complete defender-typing checks
+tests/moves.test.js Learnset, game-era, and fixed-damage exception checks
+assets/data/move-evidence.json Extracted source evidence for offline verification
 ```
 
 ## Sources
 
+- [PokéAPI species and move data](https://github.com/PokeAPI/api-data), with original source URLs retained in the move examples and extracted evidence. The upstream data license is preserved in `assets/data/SOURCE-LICENSE.txt`.
 - [Official Pokémon type chart](https://sg.portal-pokemon.com/game/type-chart/)
 - [Red/Blue original matchup data, pret/pokered](https://github.com/pret/pokered/blob/master/data/types/type_matchups.asm)
 - [Crystal original matchup data, pret/pokecrystal](https://github.com/pret/pokecrystal/blob/master/data/types/type_matchups.asm)

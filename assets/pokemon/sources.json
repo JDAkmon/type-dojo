@@ -428,5 +428,15 @@
     "file": "641.gif",
     "source": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/641.gif",
     "bytes": 142330
+  },
+  {
+    "file": "15.png",
+    "source": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/15.png",
+    "bytes": 1019
+  },
+  {
+    "file": "15.gif",
+    "source": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/15.gif",
+    "bytes": 27127
   }
 ]

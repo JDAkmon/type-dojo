@@ -1,0 +1,62 @@
+/* Pokémon type pictograms use local still art, even when battle sprites move. */
+.type-sprite-frame{display:inline-block;position:relative;width:23px;height:20px;flex-shrink:0;overflow:visible;vertical-align:middle}
+.type-sprite{display:block;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:48px;height:48px;object-fit:contain;image-rendering:pixelated;user-select:none}
+.type-badge{gap:7px}
+.type-badge.large .type-sprite-frame{width:30px;height:24px}
+.type-badge.large .type-sprite{width:58px;height:58px}
+.type-orb .type-sprite-frame{width:100%;height:100%}
+.type-orb .type-sprite{width:80px;height:80px}
+.type-select .type-orb .type-sprite{width:45px;height:45px}
+.lesson-types .type-orb .type-sprite{width:62px;height:62px}
+.lesson-visual .type-orb .type-sprite{width:120px;height:120px}
+.column-type .type-sprite-frame{width:28px;height:24px}
+.column-type .type-sprite{width:52px;height:52px}
+.lesson-card-cast .type-sprite-frame{width:17px;height:14px}
+.lesson-card-cast .type-sprite{width:35px;height:35px}
+
+/* Front sprites look left in the game artwork. Mirror the attacker toward its target. */
+.battle-actor.attacker .pokemon-sprite{scale:-1 1}
+.memory-sprite-duel>.pokemon-sprite:first-child,.battle-card-scene>.pokemon-sprite:first-child{scale:-1 1}
+.battle-panel>p strong{color:#506b57;font-weight:650}
+.battle-types{display:grid;grid-template-columns:minmax(0,1fr) 60px minmax(0,1fr);gap:24px;max-width:640px;margin:20px auto 10px;align-items:start}
+.battle-types>div{min-width:0;gap:9px}
+.battle-move-name{font-size:15px;line-height:22px;color:#425c51;text-align:center;min-height:22px}
+.battle-target-label{font-size:10px;color:#6f8962;font-weight:500}
+.battle-arrow{padding-top:90px}
+.battle-arrow>.icon{width:48px;height:35px;color:#ba9350}
+.battle-arrow small{font-size:8px;font-weight:650;color:#758465;letter-spacing:1.4px}
+.move-info{margin:-11px 0 22px;border:1px solid #e1e8d7;border-radius:8px;background:#f7faef;text-align:left;font-size:11px;color:#627456}
+.move-info summary{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px 12px;cursor:pointer;padding:11px 14px;list-style:none}
+.move-info summary::-webkit-details-marker{display:none}
+.move-info summary:hover{background:#edf5dc;border-radius:8px}
+.move-info summary:focus-visible{outline:2px solid #93ad6d;outline-offset:3px}
+.move-info summary>.icon{width:14px;height:14px;flex-shrink:0}
+.move-game{color:#8a805e;font-size:10px}
+.move-info>div{border-top:1px solid #e1e8d7;padding:2px 16px 14px;line-height:1.7}
+.move-info a{color:#627d8d;text-decoration:underline;text-underline-offset:2px}
+.move-exception{margin:-8px 0 22px;padding:12px 16px;border:1px solid #e9dcb8;border-radius:8px;background:#fff8e4;font-size:11px;color:#8c7952;line-height:1.7}
+.answer-options{margin-top:22px}
+.answer-option{transition:background-color .16s,border-color .16s,color .16s,box-shadow .16s,translate .16s;--hover-bg:#e7f0f6;--hover-border:#87a9bd;--hover-ink:#3f677e}
+.answer-option[data-effect="0"]{--hover-bg:#efe7fa;--hover-border:#ac8bce;--hover-ink:#745091}
+.answer-option[data-effect="0.25"]{--hover-bg:#dff4f4;--hover-border:#80bbbd;--hover-ink:#427f82}
+.answer-option[data-effect="0.5"]{--hover-bg:#fff1ce;--hover-border:#d4b36b;--hover-ink:#967135}
+.answer-option[data-effect="2"]{--hover-bg:#e0f1d5;--hover-border:#90b773;--hover-ink:#53763c}
+.answer-option[data-effect="4"]{--hover-bg:#ffe4d6;--hover-border:#d99372;--hover-ink:#a25b39}
+.answer-option:hover:not(:disabled),.answer-option:focus-visible:not(:disabled){background:var(--hover-bg);border-color:var(--hover-border);color:var(--hover-ink);box-shadow:0 4px 0 color-mix(in srgb,var(--hover-border) 25%,transparent);translate:0 -3px}
+.answer-option:hover:not(:disabled)>span,.answer-option:focus-visible:not(:disabled)>span{color:var(--hover-ink)}
+.answer-option:focus-visible:not(:disabled){outline:2px solid var(--hover-border);outline-offset:3px}
+@media(max-width:600px){
+  .type-badge.large .type-sprite-frame{width:23px;height:19px}
+  .type-badge.large .type-sprite{width:46px;height:46px}
+  .battle-types{grid-template-columns:minmax(0,1fr) 27px minmax(0,1fr);gap:3px}
+  .battle-types .type-badge{padding:5px 6px;font-size:9px;gap:4px}
+  .battle-types>div:last-child>div:last-child{display:flex;flex-wrap:wrap;justify-content:center;gap:4px}
+  .battle-move-name{font-size:12px;line-height:20px;min-height:20px}
+  .battle-target-label{font-size:9px}
+  .battle-arrow>.icon{width:29px}
+  .battle-arrow small{font-size:6px;letter-spacing:.5px}
+  .battle-arrow{padding-top:76px}
+  .move-info summary{font-size:10px;text-align:center}
+  .move-info summary .move-game{width:100%;order:3}
+}
+@media(prefers-reduced-motion:reduce){.answer-option{transition:none}.answer-option:hover:not(:disabled),.answer-option:focus-visible:not(:disabled){translate:none}}

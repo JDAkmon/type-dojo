@@ -7,3 +7,7 @@ The source repository identifies image contents as copyright The Pokémon Compan
 Each downloaded file's original URL is listed in `pokemon/sources.json`. All images are served locally; using the app does not call PokéAPI or another external service.
 
 The pixel-art landscape and interface decorations are original vector artwork created for Type Dojo.
+
+## Move and learnset data
+
+Species-specific move examples and their game-version learning methods come from [PokéAPI's official API data mirror](https://github.com/PokeAPI/api-data). The source endpoint URLs are recorded in `src/move-examples.js`; relevant raw learnset and move records are extracted in `data/move-evidence.json` so tests work offline. The data repository's BSD license is preserved in `data/SOURCE-LICENSE.txt`.
