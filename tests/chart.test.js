@@ -2,6 +2,7 @@ import './pokemon.test.js';
 import './moves.test.js';
 import './reset.test.js';
 import './sound.test.js';
+import './study.test.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {typesFor,pairsFor,effectiveness,dualEffectiveness,mnemonic,LESSONS} from '../src/data.js';
@@ -71,7 +72,7 @@ test('Practice balances outcomes and avoids repeated questions',()=>{
  const b=freshState().eras['6'];const session=buildSession('attack','6',b,10,()=>.5);
  assert.equal(session.length,10);assert.equal(new Set(session.map(q=>q.key)).size,10);
  assert.deepEqual([...new Set(session.map(q=>q.value))].sort(),[0,.5,1,2].sort());
- assert.ok(buildSession('immunity','6',b).every(q=>q.value===0));
+ const detective=buildSession('immunity','6',b);assert.ok(detective.some(q=>q.value===0));assert.ok(detective.some(q=>q.value!==0));
  assert.equal(buildSession('review','6',b).length,0);
  recordAnswer(b,'Water>Fire',false,false,0);assert.equal(buildSession('review','6',b,10,()=>.5,1)[0].key,'Water>Fire');
  const dual=buildSession('dual','6',b,10,()=>.5);assert.deepEqual([...new Set(dual.map(q=>q.value))].sort(),[0,.25,.5,1,2,4].sort());

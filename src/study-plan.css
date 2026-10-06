@@ -1,0 +1,52 @@
+.study-plan{background:#fffef7;border:1px solid #e1e6d3;border-radius:12px;padding:24px;margin:24px 0 30px;box-shadow:0 3px 0 #e9edda45}
+.study-plan-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin-bottom:20px}
+.study-plan-heading h2{margin:7px 0;color:#49604c;font-size:23px}
+.study-plan-heading p{font-size:11px;color:#839075;max-width:520px}
+.study-time{display:flex;align-items:center;gap:6px;white-space:nowrap;font-size:10px;color:#9b8c62;background:#fff6dd;border:1px solid #eee3bb;border-radius:7px;padding:8px 10px}
+.study-time .icon{width:14px;height:14px}
+.priority-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.priority-card{display:flex;align-items:center;gap:11px;border:1px solid color-mix(in srgb,var(--type) 22%,#e5e8db);background:color-mix(in srgb,var(--type) 5%,#fffef6);border-radius:10px;padding:14px 11px;position:relative;min-width:0}
+.priority-rank{position:absolute;left:8px;top:7px;font-size:8px;font-weight:700;color:#a2a884}
+.priority-pokemon{width:64px;height:64px;filter:drop-shadow(0 3px #adb98430)}
+.priority-card p{font-size:10px;color:#7c8b6c;margin-top:8px;line-height:1.6}
+.priority-card .type-badge.large{font-size:11px;padding:5px 8px;gap:6px}
+.priority-card .type-sprite-frame{width:21px;height:19px}
+.priority-card .type-sprite{width:43px;height:43px}
+.study-plan-actions{display:flex;align-items:center;gap:17px;margin-top:20px}
+.study-plan-actions>span{font-size:10px;color:#93a07d;line-height:1.6}
+.study-empty{display:flex;align-items:center;gap:23px;border:1px dashed #dce3cb;border-radius:9px;padding:13px 24px;background:#f7faed}
+.study-empty .pokemon-sprite{width:64px;height:64px}
+.study-empty p{font-size:12px;color:#8b9678;max-width:550px}
+.graduation-card{display:flex;align-items:center;gap:22px;padding:22px 26px;border:1px solid #e4ce91;border-radius:12px;background:linear-gradient(115deg,#fff3cc,#fffaf0);margin:24px 0;box-shadow:0 3px 0 #eedfb730}
+.graduation-card.badge-earned{border-color:#b7cca0;background:linear-gradient(115deg,#edf5d9,#fffdf1)}
+.graduation-pokemon{position:relative;flex-shrink:0}
+.graduation-pokemon .pokemon-sprite{width:90px;height:90px}
+.graduation-pokemon>.icon{position:absolute;right:-3px;bottom:0;color:#caa340;background:#fffbe9;border:1px solid #e7d8a2;border-radius:50%;padding:7px;width:32px;height:32px}
+.graduation-card>div:nth-child(2){flex:1;min-width:0}
+.graduation-card h2{color:#72613f;margin:7px 0;font-size:22px}
+.graduation-card p{font-size:11px;color:#9b8b63;max-width:530px}
+.graduation-card .primary{font-size:11px;flex-shrink:0}
+.challenge-history{display:block;font-size:10px;color:#9a895a;margin-top:8px}
+.challenge-prep{background:#fffefa;border:1px solid #e6e5d8;border-radius:12px;padding:25px;margin:24px 0}
+.challenge-prep h3{color:#5b7457;margin-bottom:22px}
+.challenge-prep-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:25px;margin-bottom:20px}
+.challenge-prep-grid .icon{color:#b29b55;width:24px;height:24px;display:block;margin-bottom:12px}
+.challenge-prep-grid b{font-size:12px;color:#6c805d}
+.challenge-prep-grid p{font-size:11px;color:#929c80;margin-top:8px}
+.challenge-result{display:flex;align-items:center;justify-content:center;gap:13px;background:#fff8e6;border:1px solid #e9dcb5;border-radius:10px;padding:15px;margin:23px 0;text-align:left;color:#a38b4e}
+.challenge-result.earned{background:#f0f6e0;border-color:#c4d7ab;color:#76915b}
+.challenge-result>.icon{width:32px;height:32px}
+.challenge-result b{font-size:13px}
+.challenge-result p{font-size:11px!important;color:#8b9778!important;margin:5px 0!important}
+.challenge-result small{display:block;font-size:10px;color:#969779;margin-top:8px}
+@media(max-width:1100px){.priority-grid{gap:9px}.priority-card{gap:6px;padding:14px 8px}.priority-pokemon{width:48px;height:56px}.graduation-card{flex-wrap:wrap}.graduation-card>.primary{margin-left:auto}.study-plan-heading{flex-wrap:wrap;gap:13px}}
+@media(max-width:600px){
+  .study-plan{padding:18px 14px;margin:22px 0}.study-plan-heading h2{font-size:21px}.study-time{font-size:9px}
+  .priority-grid{grid-template-columns:1fr}.priority-card{padding:13px 19px;gap:17px}.priority-pokemon{width:62px;height:62px}
+  .priority-card .type-badge.large{font-size:11px}.priority-card p{font-size:11px}.study-plan-actions{align-items:flex-start;flex-direction:column;gap:11px}
+  .study-plan-actions .primary{width:100%;justify-content:center}.study-empty{padding:12px;gap:12px}.study-empty p{font-size:11px}
+  .graduation-card{padding:20px 15px;gap:16px}.graduation-pokemon .pokemon-sprite{width:66px;height:72px}.graduation-card h2{font-size:19px}
+  .graduation-card>.primary{width:100%;justify-content:center;margin-left:0}.graduation-card p{font-size:11px}
+  .challenge-prep{padding:20px}.challenge-prep-grid{grid-template-columns:1fr;gap:21px}.challenge-prep-grid .icon{float:left;margin:0 11px 15px 0}
+  .challenge-result{padding:13px;gap:10px}.challenge-result b{font-size:12px}
+}

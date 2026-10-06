@@ -20,8 +20,10 @@ The app has no dependencies and makes no external requests. Everything works wit
 
 ## Learn from zero to hero
 
-- **Ground Zero:** six guided chapters, from the Fire/Water/Grass triangle to dual-type multiplication. Read first, practice second. A lesson completes at 75% correct without hints. The later-types chapter is unavailable in Generation I.
-- **Practice arena:** attack matchups, incoming damage, immunities, dual types, adaptive review, and a 20-question challenge without hints. Number keys answer; Enter advances after feedback when focus is outside a button.
+- **Ground Zero:** six guided chapters, from the Fire/Water/Grass triangle to dual-type multiplication. Read first, practice second. A lesson completes at 75% correct without hints. The later-types chapter is unavailable in Generation I. Completing every available chapter opens graduation and the Type Hero challenge, with an option to revisit lessons.
+- **Practice arena:** attack matchups, incoming damage, immunity detective, dual types, adaptive review, and a 20-question challenge without hints. Immunity detective mixes immune attacks with similar attacks that land. Number keys answer; Enter advances after feedback when focus is outside a button.
+- **Personal study plan:** home shows up to three priority types, with reasons drawn from mistakes, hints, and due reviews in the selected era. A six-question session revisits those types, including previously attempted dual-type matchups. New learners get familiar Fire/Water/Grass questions first.
+- **Type Hero badge:** get 16 of 20 challenge questions correct without hints (80%) to earn a badge for that era. Best score and attempt history persist across refreshes and backups; a later lower score does not revoke an earned badge. The badge is a challenge milestone, separate from full chart mastery.
 - **Type library:** browse all available types, see offensive and defensive matchups separately, and use story-based mnemonics.
 - **Matchup chart:** complete interactive chart plus a dual-type calculator. Rows attack; columns defend.
 - **My progress:** XP, accuracy, mastery, explored cells, training days, and personal review queue. Export/import JSON backups, or reset one era.
@@ -65,7 +67,11 @@ Both choices preserve the other game eras and your study buddy/settings. **Undo 
 
 Progress is stored in this browser's local storage under `type-dojo-v1`. Each chart era has its own lessons, XP, and matchup records. Use a consistent origin (host and port) to keep using the same save. Clearing browser data removes local progress; export a backup first.
 
-Three consecutive correct, unaided answers mark a matchup mastered. Misses and hints reset the unaided streak. Review intervals are 1 minute, 10 minutes, 1 day, 3 days, and then 7 days. New, missed, and overdue cells receive extra weight; sessions sample all available result categories and do not repeat a question within a session. Immunity mode deliberately only contains 0× answers.
+Three consecutive correct, unaided answers mark a matchup mastered. Misses and hints reset the unaided streak. Review intervals are 1 minute, 10 minutes, 1 day, 3 days, and then 7 days. New, missed, and overdue cells receive extra weight; sessions sample available result categories and do not repeat a question within a session. The standard ten-question immunity session contains five 0× matchups and five nonzero contrasts, in shuffled order, including resistance, neutral, and super-effective results.
+
+Study priorities include types on either side of your attempted matchups, counting a type once per question even if it appears on both sides. Mistakes and hints on unmastered matchups rank ahead of ordinary refreshers. Mastered, up-to-date matchups leave the priority list; due reviews return. The six-question plan covers the displayed priority types and updates as you answer. It does not create unseen dual-type exercises for beginners. With little or no history, the home copy explains that the plan is still developing instead of claiming to know your weaknesses.
+
+Challenge history is saved separately in each era's progress bucket. Existing version-1 backups without challenge history remain compatible and receive an empty challenge record. A full era reset clears its badge and scores; restarting lessons only retains them. Undo restores the corresponding saved progress.
 
 Mastery counts every single-type cell, including neutral cells: 225, 289, or 324 depending on the era. Dual-type answers earn XP and count toward overall accuracy, but do not inflate single-type mastery. This is a practical self-study measure, not a guarantee of long-term retention. Correct unaided answers earn 10 XP, hinted correct answers 4, and mistakes 2. Ground Zero completion counts unaided correct answers, while overall accuracy includes correct answers with hints.
 
@@ -84,12 +90,14 @@ src/move-examples.js Verified species-specific move examples for each chart era
 src/move-ui.css     Sprite type pictograms, directional battles, and card hover colors
 src/sound.js        Gentle synthesized cues, mute, volume, and playback limits
 src/sound-journey.css Sound controls and restart journey styling
+src/study-plan.css  Personal study cards, graduation, and Type Hero badge styling
 assets/            Local sprite images, source credits, and original scenery
 tests/chart.test.js Historical chart fixtures and learning-system checks
 tests/pokemon.test.js Sprite availability and complete defender-typing checks
 tests/moves.test.js Learnset, game-era, and fixed-damage exception checks
 tests/reset.test.js Scoped resets, persistent undo, and preservation of other eras
 tests/sound.test.js Quiet playback, mute, visibility, and audio failure handling
+tests/study.test.js Mixed immunity drills, graduation, study priorities, badges, and save migration
 assets/data/move-evidence.json Extracted source evidence for offline verification
 ```
 
