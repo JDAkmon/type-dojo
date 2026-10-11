@@ -53,11 +53,12 @@ test('Fresh learners get familiar starter practice, while focus sessions cover t
 test('Mastered, up-to-date types leave the study priorities, and overdue refreshers return',()=>{
   const b=freshState().eras['6'];recordAnswer(b,'Water>Fire',false,false,1000);
   for(let i=0;i<3;i++)recordAnswer(b,'Water>Fire',true,false,2000+i);
-  assert.deepEqual(studyPriorities(b,'6',3,3000),[]);
-  const refresh=studyPriorities(b,'6',3,2002+86400000);assert.equal(refresh.length,2);
+  recordAnswer(b,'Water>Fire',true,false,2002+86400000);
+  assert.deepEqual(studyPriorities(b,'6',3,2003+86400000),[]);
+  const refresh=studyPriorities(b,'6',3,2002+4*86400000);assert.equal(refresh.length,2);
   assert.ok(refresh.every(p=>p.reason==='review'&&p.misses===0));
-  for(const q of pairsFor('6'))for(let i=0;i<3;i++)recordAnswer(b,q.key,true,false,4000+i);
-  assert.equal(buildStudySession('6',b,6,()=>.5,5000).length,6);
+  for(const q of pairsFor('6')){for(let i=0;i<3;i++)recordAnswer(b,q.key,true,false,4000+i);recordAnswer(b,q.key,true,false,4002+86400000);}
+  assert.equal(buildStudySession('6',b,6,()=>.5,5000+86400000).length,6);
 });
 test('Challenge badges require 16/20, persist by era, and keep the best score after a later miss',()=>{
   const s=freshState(),b=s.eras['6'];recordChallenge(b,15,1000);assert.equal(b.challenge.passedAt,null);

@@ -1,3 +1,4 @@
+import {matchupKey} from './matchup.js';
 export const TYPES = ['Normal','Fire','Water','Electric','Grass','Ice','Fighting','Poison','Ground','Flying','Psychic','Bug','Rock','Ghost','Dragon','Dark','Steel','Fairy'];
 export const COLORS = { Normal:'#8b8c9c',Fire:'#e98152',Water:'#578ddd',Electric:'#cfaa31',Grass:'#69a46a',Ice:'#64b4b8',Fighting:'#c2715d',Poison:'#a26ec2',Ground:'#bf9470',Flying:'#8e9bcd',Psychic:'#d577a3',Bug:'#98a44f',Rock:'#ac9a68',Ghost:'#8373b2',Dragon:'#7773d0',Dark:'#776c80',Steel:'#7797a6',Fairy:'#cc8fb8' };
 // Rows are attacking types; each list names defending types. All omitted cells are 1×.
@@ -97,7 +98,7 @@ export function mnemonic(attack,defend,era='6') {
   }
   return `No special advantage here: ${attack} deals normal damage to ${defend}. Learn the direction—swapping attacker and defender can change the result.`;
 }
-export function pairsFor(era) { return typesFor(era).flatMap(a=>typesFor(era).map(d=>({a,ds:[d],key:`${a}>${d}`,value:effectiveness(a,d,era)}))); }
+export function pairsFor(era) { return typesFor(era).flatMap(a=>typesFor(era).map(d=>({a,ds:[d],key:matchupKey(a,[d]),value:effectiveness(a,d,era)}))); }
 export const LESSONS = [
  {id:'basics',title:'The first three',tag:'START HERE',description:'Meet Fire, Water, and Grass. Learn who beats whom.',types:['Fire','Water','Grass'],text:'The move’s type attacks the Pokémon’s type. Water beats Fire (2×). Fire beats Grass (2×). Grass beats Water (2×). The reverse attacks are resisted (½×). A type is not the same as a move: a Water Pokémon can use a move of another type.',pairs:[['Water','Fire'],['Fire','Grass'],['Grass','Water'],['Fire','Water'],['Grass','Fire'],['Water','Grass'],['Fire','Fire'],['Water','Water']]},
  {id:'elements',title:'A spark of understanding',tag:'LESSON 02',description:'Electricity, ice, and the difference between 0× and 1×.',types:['Electric','Ice','Ground'],text:'Super effective means 2× damage; resistance means ½×; neutral means 1×; immunity means 0×. Electric beats Water and Flying, but cannot hit Ground at all. Ice beats Grass, Ground, Flying, and Dragon. Type advantage alone is not a guaranteed win.',pairs:[['Electric','Water'],['Electric','Ground'],['Ice','Grass'],['Ice','Ground'],['Electric','Flying'],['Ice','Dragon'],['Electric','Fire'],['Ice','Fire']]},

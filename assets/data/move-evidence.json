@@ -1269,6 +1269,131 @@
       "name": "Charmander",
       "moves": [
         {
+          "slug": "scratch",
+          "details": [
+            {
+              "versionGroup": "red-blue",
+              "method": "level-up",
+              "level": 1
+            },
+            {
+              "versionGroup": "yellow",
+              "method": "level-up",
+              "level": 1
+            },
+            {
+              "versionGroup": "gold-silver",
+              "method": "level-up",
+              "level": 1
+            },
+            {
+              "versionGroup": "crystal",
+              "method": "level-up",
+              "level": 1
+            },
+            {
+              "versionGroup": "ruby-sapphire",
+              "method": "level-up",
+              "level": 1
+            },
+            {
+              "versionGroup": "emerald",
+              "method": "level-up",
+              "level": 1
+            },
+            {
+              "versionGroup": "firered-leafgreen",
+              "method": "level-up",
+              "level": 1
+            },
+            {
+              "versionGroup": "diamond-pearl",
+              "method": "level-up",
+              "level": 1
+            },
+            {
+              "versionGroup": "platinum",
+              "method": "level-up",
+              "level": 1
+            },
+            {
+              "versionGroup": "heartgold-soulsilver",
+              "method": "level-up",
+              "level": 1
+            },
+            {
+              "versionGroup": "black-white",
+              "method": "level-up",
+              "level": 1
+            },
+            {
+              "versionGroup": "colosseum",
+              "method": "level-up",
+              "level": 1
+            },
+            {
+              "versionGroup": "xd",
+              "method": "level-up",
+              "level": 1
+            },
+            {
+              "versionGroup": "black-2-white-2",
+              "method": "level-up",
+              "level": 1
+            },
+            {
+              "versionGroup": "x-y",
+              "method": "level-up",
+              "level": 1
+            },
+            {
+              "versionGroup": "omega-ruby-alpha-sapphire",
+              "method": "level-up",
+              "level": 1
+            },
+            {
+              "versionGroup": "sun-moon",
+              "method": "level-up",
+              "level": 1
+            },
+            {
+              "versionGroup": "ultra-sun-ultra-moon",
+              "method": "level-up",
+              "level": 1
+            },
+            {
+              "versionGroup": "lets-go-pikachu-lets-go-eevee",
+              "method": "level-up",
+              "level": 1
+            },
+            {
+              "versionGroup": "sword-shield",
+              "method": "level-up",
+              "level": 1
+            },
+            {
+              "versionGroup": "brilliant-diamond-shining-pearl",
+              "method": "level-up",
+              "level": 1
+            },
+            {
+              "versionGroup": "scarlet-violet",
+              "method": "level-up",
+              "level": 1
+            },
+            {
+              "versionGroup": "red-green-japan",
+              "method": "level-up",
+              "level": 1
+            },
+            {
+              "versionGroup": "blue-japan",
+              "method": "level-up",
+              "level": 1
+            }
+          ]
+        },
+        {
           "slug": "wing-attack",
           "details": [
             {
@@ -1549,226 +1674,6 @@
           ]
         },
         {
-          "slug": "flamethrower",
-          "details": [
-            {
-              "versionGroup": "red-blue",
-              "method": "level-up",
-              "level": 38
-            },
-            {
-              "versionGroup": "yellow",
-              "method": "level-up",
-              "level": 38
-            },
-            {
-              "versionGroup": "gold-silver",
-              "method": "level-up",
-              "level": 31
-            },
-            {
-              "versionGroup": "crystal",
-              "method": "level-up",
-              "level": 31
-            },
-            {
-              "versionGroup": "crystal",
-              "method": "tutor",
-              "level": 0
-            },
-            {
-              "versionGroup": "ruby-sapphire",
-              "method": "level-up",
-              "level": 31
-            },
-            {
-              "versionGroup": "ruby-sapphire",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "emerald",
-              "method": "level-up",
-              "level": 31
-            },
-            {
-              "versionGroup": "emerald",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "firered-leafgreen",
-              "method": "level-up",
-              "level": 31
-            },
-            {
-              "versionGroup": "firered-leafgreen",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "diamond-pearl",
-              "method": "level-up",
-              "level": 34
-            },
-            {
-              "versionGroup": "diamond-pearl",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "platinum",
-              "method": "level-up",
-              "level": 34
-            },
-            {
-              "versionGroup": "platinum",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "heartgold-soulsilver",
-              "method": "level-up",
-              "level": 34
-            },
-            {
-              "versionGroup": "heartgold-soulsilver",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "black-white",
-              "method": "level-up",
-              "level": 37
-            },
-            {
-              "versionGroup": "black-white",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "colosseum",
-              "method": "level-up",
-              "level": 31
-            },
-            {
-              "versionGroup": "colosseum",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "xd",
-              "method": "level-up",
-              "level": 31
-            },
-            {
-              "versionGroup": "xd",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "black-2-white-2",
-              "method": "level-up",
-              "level": 37
-            },
-            {
-              "versionGroup": "black-2-white-2",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "x-y",
-              "method": "level-up",
-              "level": 37
-            },
-            {
-              "versionGroup": "x-y",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "omega-ruby-alpha-sapphire",
-              "method": "level-up",
-              "level": 37
-            },
-            {
-              "versionGroup": "omega-ruby-alpha-sapphire",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "sun-moon",
-              "method": "level-up",
-              "level": 37
-            },
-            {
-              "versionGroup": "sun-moon",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "ultra-sun-ultra-moon",
-              "method": "level-up",
-              "level": 37
-            },
-            {
-              "versionGroup": "ultra-sun-ultra-moon",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "lets-go-pikachu-lets-go-eevee",
-              "method": "level-up",
-              "level": 36
-            },
-            {
-              "versionGroup": "lets-go-pikachu-lets-go-eevee",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "sword-shield",
-              "method": "level-up",
-              "level": 24
-            },
-            {
-              "versionGroup": "sword-shield",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "brilliant-diamond-shining-pearl",
-              "method": "level-up",
-              "level": 24
-            },
-            {
-              "versionGroup": "brilliant-diamond-shining-pearl",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "scarlet-violet",
-              "method": "level-up",
-              "level": 24
-            },
-            {
-              "versionGroup": "scarlet-violet",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "red-green-japan",
-              "method": "level-up",
-              "level": 38
-            },
-            {
-              "versionGroup": "blue-japan",
-              "method": "level-up",
-              "level": 38
-            }
-          ]
-        },
-        {
           "slug": "dig",
           "details": [
             {
@@ -1884,156 +1789,6 @@
           ]
         },
         {
-          "slug": "rock-slide",
-          "details": [
-            {
-              "versionGroup": "gold-silver",
-              "method": "egg",
-              "level": 0
-            },
-            {
-              "versionGroup": "crystal",
-              "method": "egg",
-              "level": 0
-            },
-            {
-              "versionGroup": "ruby-sapphire",
-              "method": "egg",
-              "level": 0
-            },
-            {
-              "versionGroup": "emerald",
-              "method": "egg",
-              "level": 0
-            },
-            {
-              "versionGroup": "emerald",
-              "method": "tutor",
-              "level": 0
-            },
-            {
-              "versionGroup": "firered-leafgreen",
-              "method": "egg",
-              "level": 0
-            },
-            {
-              "versionGroup": "firered-leafgreen",
-              "method": "tutor",
-              "level": 0
-            },
-            {
-              "versionGroup": "diamond-pearl",
-              "method": "egg",
-              "level": 0
-            },
-            {
-              "versionGroup": "diamond-pearl",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "platinum",
-              "method": "egg",
-              "level": 0
-            },
-            {
-              "versionGroup": "platinum",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "heartgold-soulsilver",
-              "method": "egg",
-              "level": 0
-            },
-            {
-              "versionGroup": "heartgold-soulsilver",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "black-white",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "black-2-white-2",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "x-y",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "omega-ruby-alpha-sapphire",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "sun-moon",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "ultra-sun-ultra-moon",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "lets-go-pikachu-lets-go-eevee",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "sword-shield",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "brilliant-diamond-shining-pearl",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "scarlet-violet",
-              "method": "machine",
-              "level": 0
-            }
-          ]
-        },
-        {
-          "slug": "mud-slap",
-          "details": [
-            {
-              "versionGroup": "gold-silver",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "crystal",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "emerald",
-              "method": "tutor",
-              "level": 0
-            },
-            {
-              "versionGroup": "platinum",
-              "method": "tutor",
-              "level": 0
-            },
-            {
-              "versionGroup": "heartgold-soulsilver",
-              "method": "tutor",
-              "level": 0
-            }
-          ]
-        },
-        {
           "slug": "dragon-breath",
           "details": [
             {
@@ -2060,6 +1815,96 @@
               "versionGroup": "scarlet-violet",
               "method": "level-up",
               "level": 12
+            }
+          ]
+        },
+        {
+          "slug": "iron-tail",
+          "details": [
+            {
+              "versionGroup": "gold-silver",
+              "method": "machine",
+              "level": 0
+            },
+            {
+              "versionGroup": "crystal",
+              "method": "machine",
+              "level": 0
+            },
+            {
+              "versionGroup": "ruby-sapphire",
+              "method": "machine",
+              "level": 0
+            },
+            {
+              "versionGroup": "emerald",
+              "method": "machine",
+              "level": 0
+            },
+            {
+              "versionGroup": "firered-leafgreen",
+              "method": "machine",
+              "level": 0
+            },
+            {
+              "versionGroup": "diamond-pearl",
+              "method": "machine",
+              "level": 0
+            },
+            {
+              "versionGroup": "platinum",
+              "method": "machine",
+              "level": 0
+            },
+            {
+              "versionGroup": "heartgold-soulsilver",
+              "method": "machine",
+              "level": 0
+            },
+            {
+              "versionGroup": "colosseum",
+              "method": "machine",
+              "level": 0
+            },
+            {
+              "versionGroup": "xd",
+              "method": "machine",
+              "level": 0
+            },
+            {
+              "versionGroup": "black-2-white-2",
+              "method": "tutor",
+              "level": 0
+            },
+            {
+              "versionGroup": "omega-ruby-alpha-sapphire",
+              "method": "tutor",
+              "level": 0
+            },
+            {
+              "versionGroup": "ultra-sun-ultra-moon",
+              "method": "tutor",
+              "level": 0
+            },
+            {
+              "versionGroup": "lets-go-pikachu-lets-go-eevee",
+              "method": "machine",
+              "level": 0
+            },
+            {
+              "versionGroup": "sword-shield",
+              "method": "machine",
+              "level": 0
+            },
+            {
+              "versionGroup": "brilliant-diamond-shining-pearl",
+              "method": "machine",
+              "level": 0
+            },
+            {
+              "versionGroup": "scarlet-violet",
+              "method": "egg",
+              "level": 0
             }
           ]
         },
@@ -2139,103 +1984,48 @@
           ]
         },
         {
-          "slug": "brick-break",
+          "slug": "ancient-power",
           "details": [
             {
+              "versionGroup": "gold-silver",
+              "method": "egg",
+              "level": 0
+            },
+            {
+              "versionGroup": "crystal",
+              "method": "egg",
+              "level": 0
+            },
+            {
               "versionGroup": "ruby-sapphire",
-              "method": "machine",
+              "method": "egg",
               "level": 0
             },
             {
               "versionGroup": "emerald",
-              "method": "machine",
+              "method": "egg",
               "level": 0
             },
             {
               "versionGroup": "firered-leafgreen",
-              "method": "machine",
+              "method": "egg",
               "level": 0
             },
             {
               "versionGroup": "diamond-pearl",
-              "method": "machine",
+              "method": "egg",
               "level": 0
             },
             {
               "versionGroup": "platinum",
-              "method": "machine",
+              "method": "egg",
               "level": 0
             },
             {
               "versionGroup": "heartgold-soulsilver",
-              "method": "machine",
+              "method": "egg",
               "level": 0
             },
-            {
-              "versionGroup": "black-white",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "colosseum",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "xd",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "black-2-white-2",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "x-y",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "omega-ruby-alpha-sapphire",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "sun-moon",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "ultra-sun-ultra-moon",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "lets-go-pikachu-lets-go-eevee",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "sword-shield",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "brilliant-diamond-shining-pearl",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "scarlet-violet",
-              "method": "machine",
-              "level": 0
-            }
-          ]
-        },
-        {
-          "slug": "dragon-pulse",
-          "details": [
             {
               "versionGroup": "black-white",
               "method": "egg",
@@ -2257,11 +2047,6 @@
               "level": 0
             },
             {
-              "versionGroup": "omega-ruby-alpha-sapphire",
-              "method": "tutor",
-              "level": 0
-            },
-            {
               "versionGroup": "sun-moon",
               "method": "egg",
               "level": 0
@@ -2272,28 +2057,18 @@
               "level": 0
             },
             {
-              "versionGroup": "ultra-sun-ultra-moon",
-              "method": "tutor",
-              "level": 0
-            },
-            {
-              "versionGroup": "lets-go-pikachu-lets-go-eevee",
-              "method": "machine",
-              "level": 0
-            },
-            {
               "versionGroup": "sword-shield",
-              "method": "machine",
+              "method": "egg",
               "level": 0
             },
             {
               "versionGroup": "brilliant-diamond-shining-pearl",
-              "method": "machine",
+              "method": "egg",
               "level": 0
             },
             {
               "versionGroup": "scarlet-violet",
-              "method": "machine",
+              "method": "egg",
               "level": 0
             }
           ]
@@ -3389,6 +3164,111 @@
       "name": "Pikachu",
       "moves": [
         {
+          "slug": "slam",
+          "details": [
+            {
+              "versionGroup": "yellow",
+              "method": "level-up",
+              "level": 20
+            },
+            {
+              "versionGroup": "gold-silver",
+              "method": "level-up",
+              "level": 20
+            },
+            {
+              "versionGroup": "crystal",
+              "method": "level-up",
+              "level": 20
+            },
+            {
+              "versionGroup": "ruby-sapphire",
+              "method": "level-up",
+              "level": 20
+            },
+            {
+              "versionGroup": "emerald",
+              "method": "level-up",
+              "level": 20
+            },
+            {
+              "versionGroup": "firered-leafgreen",
+              "method": "level-up",
+              "level": 20
+            },
+            {
+              "versionGroup": "diamond-pearl",
+              "method": "level-up",
+              "level": 21
+            },
+            {
+              "versionGroup": "platinum",
+              "method": "level-up",
+              "level": 21
+            },
+            {
+              "versionGroup": "heartgold-soulsilver",
+              "method": "level-up",
+              "level": 21
+            },
+            {
+              "versionGroup": "black-white",
+              "method": "level-up",
+              "level": 26
+            },
+            {
+              "versionGroup": "colosseum",
+              "method": "level-up",
+              "level": 20
+            },
+            {
+              "versionGroup": "xd",
+              "method": "level-up",
+              "level": 20
+            },
+            {
+              "versionGroup": "black-2-white-2",
+              "method": "level-up",
+              "level": 26
+            },
+            {
+              "versionGroup": "x-y",
+              "method": "level-up",
+              "level": 26
+            },
+            {
+              "versionGroup": "omega-ruby-alpha-sapphire",
+              "method": "level-up",
+              "level": 37
+            },
+            {
+              "versionGroup": "sun-moon",
+              "method": "level-up",
+              "level": 37
+            },
+            {
+              "versionGroup": "ultra-sun-ultra-moon",
+              "method": "level-up",
+              "level": 37
+            },
+            {
+              "versionGroup": "lets-go-pikachu-lets-go-eevee",
+              "method": "level-up",
+              "level": 24
+            },
+            {
+              "versionGroup": "sword-shield",
+              "method": "level-up",
+              "level": 28
+            },
+            {
+              "versionGroup": "brilliant-diamond-shining-pearl",
+              "method": "level-up",
+              "level": 28
+            }
+          ]
+        },
+        {
           "slug": "body-slam",
           "details": [
             {
@@ -3574,241 +3454,6 @@
           ]
         },
         {
-          "slug": "thunderbolt",
-          "details": [
-            {
-              "versionGroup": "red-blue",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "yellow",
-              "method": "level-up",
-              "level": 26
-            },
-            {
-              "versionGroup": "yellow",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "gold-silver",
-              "method": "level-up",
-              "level": 26
-            },
-            {
-              "versionGroup": "crystal",
-              "method": "level-up",
-              "level": 26
-            },
-            {
-              "versionGroup": "crystal",
-              "method": "tutor",
-              "level": 0
-            },
-            {
-              "versionGroup": "ruby-sapphire",
-              "method": "level-up",
-              "level": 26
-            },
-            {
-              "versionGroup": "ruby-sapphire",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "emerald",
-              "method": "level-up",
-              "level": 26
-            },
-            {
-              "versionGroup": "emerald",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "firered-leafgreen",
-              "method": "level-up",
-              "level": 26
-            },
-            {
-              "versionGroup": "firered-leafgreen",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "diamond-pearl",
-              "method": "level-up",
-              "level": 26
-            },
-            {
-              "versionGroup": "diamond-pearl",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "platinum",
-              "method": "level-up",
-              "level": 26
-            },
-            {
-              "versionGroup": "platinum",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "heartgold-soulsilver",
-              "method": "level-up",
-              "level": 26
-            },
-            {
-              "versionGroup": "heartgold-soulsilver",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "black-white",
-              "method": "level-up",
-              "level": 29
-            },
-            {
-              "versionGroup": "black-white",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "colosseum",
-              "method": "level-up",
-              "level": 26
-            },
-            {
-              "versionGroup": "colosseum",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "xd",
-              "method": "level-up",
-              "level": 26
-            },
-            {
-              "versionGroup": "xd",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "black-2-white-2",
-              "method": "level-up",
-              "level": 29
-            },
-            {
-              "versionGroup": "black-2-white-2",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "x-y",
-              "method": "level-up",
-              "level": 29
-            },
-            {
-              "versionGroup": "x-y",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "omega-ruby-alpha-sapphire",
-              "method": "level-up",
-              "level": 42
-            },
-            {
-              "versionGroup": "omega-ruby-alpha-sapphire",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "sun-moon",
-              "method": "level-up",
-              "level": 42
-            },
-            {
-              "versionGroup": "sun-moon",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "ultra-sun-ultra-moon",
-              "method": "level-up",
-              "level": 42
-            },
-            {
-              "versionGroup": "ultra-sun-ultra-moon",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "lets-go-pikachu-lets-go-eevee",
-              "method": "level-up",
-              "level": 21
-            },
-            {
-              "versionGroup": "lets-go-pikachu-lets-go-eevee",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "sword-shield",
-              "method": "level-up",
-              "level": 36
-            },
-            {
-              "versionGroup": "sword-shield",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "brilliant-diamond-shining-pearl",
-              "method": "level-up",
-              "level": 36
-            },
-            {
-              "versionGroup": "brilliant-diamond-shining-pearl",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "legends-arceus",
-              "method": "level-up",
-              "level": 29
-            },
-            {
-              "versionGroup": "scarlet-violet",
-              "method": "level-up",
-              "level": 36
-            },
-            {
-              "versionGroup": "scarlet-violet",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "red-green-japan",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "blue-japan",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "champions",
-              "method": "train",
-              "level": 0
-            }
-          ]
-        },
-        {
           "slug": "dig",
           "details": [
             {
@@ -3899,7 +3544,142 @@
           ]
         },
         {
-          "slug": "mud-slap",
+          "slug": "quick-attack",
+          "details": [
+            {
+              "versionGroup": "red-blue",
+              "method": "level-up",
+              "level": 16
+            },
+            {
+              "versionGroup": "yellow",
+              "method": "level-up",
+              "level": 11
+            },
+            {
+              "versionGroup": "gold-silver",
+              "method": "level-up",
+              "level": 11
+            },
+            {
+              "versionGroup": "crystal",
+              "method": "level-up",
+              "level": 11
+            },
+            {
+              "versionGroup": "ruby-sapphire",
+              "method": "level-up",
+              "level": 11
+            },
+            {
+              "versionGroup": "emerald",
+              "method": "level-up",
+              "level": 11
+            },
+            {
+              "versionGroup": "firered-leafgreen",
+              "method": "level-up",
+              "level": 11
+            },
+            {
+              "versionGroup": "diamond-pearl",
+              "method": "level-up",
+              "level": 13
+            },
+            {
+              "versionGroup": "platinum",
+              "method": "level-up",
+              "level": 13
+            },
+            {
+              "versionGroup": "heartgold-soulsilver",
+              "method": "level-up",
+              "level": 13
+            },
+            {
+              "versionGroup": "black-white",
+              "method": "level-up",
+              "level": 13
+            },
+            {
+              "versionGroup": "colosseum",
+              "method": "level-up",
+              "level": 11
+            },
+            {
+              "versionGroup": "xd",
+              "method": "level-up",
+              "level": 11
+            },
+            {
+              "versionGroup": "black-2-white-2",
+              "method": "level-up",
+              "level": 13
+            },
+            {
+              "versionGroup": "x-y",
+              "method": "level-up",
+              "level": 10
+            },
+            {
+              "versionGroup": "omega-ruby-alpha-sapphire",
+              "method": "level-up",
+              "level": 10
+            },
+            {
+              "versionGroup": "sun-moon",
+              "method": "level-up",
+              "level": 10
+            },
+            {
+              "versionGroup": "ultra-sun-ultra-moon",
+              "method": "level-up",
+              "level": 10
+            },
+            {
+              "versionGroup": "lets-go-pikachu-lets-go-eevee",
+              "method": "level-up",
+              "level": 6
+            },
+            {
+              "versionGroup": "sword-shield",
+              "method": "level-up",
+              "level": 1
+            },
+            {
+              "versionGroup": "brilliant-diamond-shining-pearl",
+              "method": "level-up",
+              "level": 1
+            },
+            {
+              "versionGroup": "legends-arceus",
+              "method": "level-up",
+              "level": 5
+            },
+            {
+              "versionGroup": "scarlet-violet",
+              "method": "level-up",
+              "level": 1
+            },
+            {
+              "versionGroup": "red-green-japan",
+              "method": "level-up",
+              "level": 16
+            },
+            {
+              "versionGroup": "blue-japan",
+              "method": "level-up",
+              "level": 16
+            },
+            {
+              "versionGroup": "champions",
+              "method": "train",
+              "level": 0
+            }
+          ]
+        },
+        {
+          "slug": "iron-tail",
           "details": [
             {
               "versionGroup": "gold-silver",
@@ -3911,26 +3691,6 @@
               "method": "machine",
               "level": 0
             },
-            {
-              "versionGroup": "emerald",
-              "method": "tutor",
-              "level": 0
-            },
-            {
-              "versionGroup": "platinum",
-              "method": "tutor",
-              "level": 0
-            },
-            {
-              "versionGroup": "heartgold-soulsilver",
-              "method": "tutor",
-              "level": 0
-            }
-          ]
-        },
-        {
-          "slug": "brick-break",
-          "details": [
             {
               "versionGroup": "ruby-sapphire",
               "method": "machine",
@@ -3962,11 +3722,6 @@
               "level": 0
             },
             {
-              "versionGroup": "black-white",
-              "method": "machine",
-              "level": 0
-            },
-            {
               "versionGroup": "colosseum",
               "method": "machine",
               "level": 0
@@ -3978,27 +3733,17 @@
             },
             {
               "versionGroup": "black-2-white-2",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "x-y",
-              "method": "machine",
+              "method": "tutor",
               "level": 0
             },
             {
               "versionGroup": "omega-ruby-alpha-sapphire",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "sun-moon",
-              "method": "machine",
+              "method": "tutor",
               "level": 0
             },
             {
               "versionGroup": "ultra-sun-ultra-moon",
-              "method": "machine",
+              "method": "tutor",
               "level": 0
             },
             {
@@ -4017,9 +3762,14 @@
               "level": 0
             },
             {
+              "versionGroup": "legends-arceus",
+              "method": "level-up",
+              "level": 37
+            },
+            {
               "versionGroup": "scarlet-violet",
-              "method": "machine",
-              "level": 0
+              "method": "level-up",
+              "level": 28
             },
             {
               "versionGroup": "champions",
@@ -4043,6 +3793,126 @@
     "114": {
       "name": "Tangela",
       "moves": [
+        {
+          "slug": "slam",
+          "details": [
+            {
+              "versionGroup": "red-blue",
+              "method": "level-up",
+              "level": 45
+            },
+            {
+              "versionGroup": "yellow",
+              "method": "level-up",
+              "level": 45
+            },
+            {
+              "versionGroup": "gold-silver",
+              "method": "level-up",
+              "level": 40
+            },
+            {
+              "versionGroup": "crystal",
+              "method": "level-up",
+              "level": 40
+            },
+            {
+              "versionGroup": "ruby-sapphire",
+              "method": "level-up",
+              "level": 40
+            },
+            {
+              "versionGroup": "emerald",
+              "method": "level-up",
+              "level": 40
+            },
+            {
+              "versionGroup": "firered-leafgreen",
+              "method": "level-up",
+              "level": 40
+            },
+            {
+              "versionGroup": "diamond-pearl",
+              "method": "level-up",
+              "level": 43
+            },
+            {
+              "versionGroup": "platinum",
+              "method": "level-up",
+              "level": 43
+            },
+            {
+              "versionGroup": "heartgold-soulsilver",
+              "method": "level-up",
+              "level": 43
+            },
+            {
+              "versionGroup": "black-white",
+              "method": "level-up",
+              "level": 43
+            },
+            {
+              "versionGroup": "colosseum",
+              "method": "level-up",
+              "level": 40
+            },
+            {
+              "versionGroup": "xd",
+              "method": "level-up",
+              "level": 40
+            },
+            {
+              "versionGroup": "black-2-white-2",
+              "method": "level-up",
+              "level": 43
+            },
+            {
+              "versionGroup": "x-y",
+              "method": "level-up",
+              "level": 41
+            },
+            {
+              "versionGroup": "omega-ruby-alpha-sapphire",
+              "method": "level-up",
+              "level": 41
+            },
+            {
+              "versionGroup": "sun-moon",
+              "method": "level-up",
+              "level": 41
+            },
+            {
+              "versionGroup": "ultra-sun-ultra-moon",
+              "method": "level-up",
+              "level": 41
+            },
+            {
+              "versionGroup": "lets-go-pikachu-lets-go-eevee",
+              "method": "level-up",
+              "level": 44
+            },
+            {
+              "versionGroup": "sword-shield",
+              "method": "level-up",
+              "level": 40
+            },
+            {
+              "versionGroup": "brilliant-diamond-shining-pearl",
+              "method": "level-up",
+              "level": 40
+            },
+            {
+              "versionGroup": "red-green-japan",
+              "method": "level-up",
+              "level": 45
+            },
+            {
+              "versionGroup": "blue-japan",
+              "method": "level-up",
+              "level": 45
+            }
+          ]
+        },
         {
           "slug": "vine-whip",
           "details": [
@@ -4194,392 +4064,77 @@
           ]
         },
         {
-          "slug": "mega-drain",
+          "slug": "ancient-power",
           "details": [
             {
-              "versionGroup": "red-blue",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "yellow",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "gold-silver",
-              "method": "level-up",
-              "level": 31
-            },
-            {
-              "versionGroup": "gold-silver",
-              "method": "egg",
-              "level": 0
-            },
-            {
-              "versionGroup": "crystal",
-              "method": "level-up",
-              "level": 31
-            },
-            {
-              "versionGroup": "crystal",
-              "method": "egg",
-              "level": 0
-            },
-            {
-              "versionGroup": "ruby-sapphire",
-              "method": "level-up",
-              "level": 31
-            },
-            {
-              "versionGroup": "ruby-sapphire",
-              "method": "egg",
-              "level": 0
-            },
-            {
-              "versionGroup": "emerald",
-              "method": "level-up",
-              "level": 31
-            },
-            {
-              "versionGroup": "emerald",
-              "method": "egg",
-              "level": 0
-            },
-            {
-              "versionGroup": "firered-leafgreen",
-              "method": "level-up",
-              "level": 31
-            },
-            {
-              "versionGroup": "firered-leafgreen",
-              "method": "egg",
-              "level": 0
-            },
-            {
               "versionGroup": "diamond-pearl",
               "method": "level-up",
-              "level": 26
-            },
-            {
-              "versionGroup": "diamond-pearl",
-              "method": "egg",
-              "level": 0
+              "level": 33
             },
             {
               "versionGroup": "platinum",
               "method": "level-up",
-              "level": 26
+              "level": 33
             },
             {
               "versionGroup": "platinum",
-              "method": "egg",
+              "method": "tutor",
               "level": 0
             },
             {
               "versionGroup": "heartgold-soulsilver",
               "method": "level-up",
-              "level": 26
+              "level": 33
             },
             {
               "versionGroup": "heartgold-soulsilver",
-              "method": "egg",
+              "method": "tutor",
               "level": 0
             },
             {
               "versionGroup": "black-white",
               "method": "level-up",
-              "level": 26
-            },
-            {
-              "versionGroup": "black-white",
-              "method": "egg",
-              "level": 0
-            },
-            {
-              "versionGroup": "colosseum",
-              "method": "level-up",
-              "level": 31
-            },
-            {
-              "versionGroup": "xd",
-              "method": "level-up",
-              "level": 31
+              "level": 36
             },
             {
               "versionGroup": "black-2-white-2",
               "method": "level-up",
-              "level": 23
-            },
-            {
-              "versionGroup": "black-2-white-2",
-              "method": "egg",
-              "level": 0
+              "level": 40
             },
             {
               "versionGroup": "x-y",
               "method": "level-up",
-              "level": 23
-            },
-            {
-              "versionGroup": "x-y",
-              "method": "egg",
-              "level": 0
+              "level": 38
             },
             {
               "versionGroup": "omega-ruby-alpha-sapphire",
               "method": "level-up",
-              "level": 23
-            },
-            {
-              "versionGroup": "omega-ruby-alpha-sapphire",
-              "method": "egg",
-              "level": 0
+              "level": 38
             },
             {
               "versionGroup": "sun-moon",
               "method": "level-up",
-              "level": 23
-            },
-            {
-              "versionGroup": "sun-moon",
-              "method": "egg",
-              "level": 0
+              "level": 38
             },
             {
               "versionGroup": "ultra-sun-ultra-moon",
               "method": "level-up",
-              "level": 23
+              "level": 38
             },
             {
-              "versionGroup": "ultra-sun-ultra-moon",
-              "method": "egg",
-              "level": 0
+              "versionGroup": "sword-shield",
+              "method": "level-up",
+              "level": 24
             },
             {
-              "versionGroup": "lets-go-pikachu-lets-go-eevee",
+              "versionGroup": "brilliant-diamond-shining-pearl",
+              "method": "level-up",
+              "level": 24
+            },
+            {
+              "versionGroup": "legends-arceus",
               "method": "level-up",
               "level": 34
-            },
-            {
-              "versionGroup": "lets-go-pikachu-lets-go-eevee",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "sword-shield",
-              "method": "level-up",
-              "level": 12
-            },
-            {
-              "versionGroup": "brilliant-diamond-shining-pearl",
-              "method": "level-up",
-              "level": 12
-            },
-            {
-              "versionGroup": "brilliant-diamond-shining-pearl",
-              "method": "egg",
-              "level": 0
-            },
-            {
-              "versionGroup": "red-green-japan",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "blue-japan",
-              "method": "machine",
-              "level": 0
-            }
-          ]
-        },
-        {
-          "slug": "confusion",
-          "details": [
-            {
-              "versionGroup": "gold-silver",
-              "method": "egg",
-              "level": 0
-            },
-            {
-              "versionGroup": "crystal",
-              "method": "egg",
-              "level": 0
-            },
-            {
-              "versionGroup": "ruby-sapphire",
-              "method": "egg",
-              "level": 0
-            },
-            {
-              "versionGroup": "emerald",
-              "method": "egg",
-              "level": 0
-            },
-            {
-              "versionGroup": "firered-leafgreen",
-              "method": "egg",
-              "level": 0
-            },
-            {
-              "versionGroup": "diamond-pearl",
-              "method": "egg",
-              "level": 0
-            },
-            {
-              "versionGroup": "platinum",
-              "method": "egg",
-              "level": 0
-            },
-            {
-              "versionGroup": "heartgold-soulsilver",
-              "method": "egg",
-              "level": 0
-            },
-            {
-              "versionGroup": "black-white",
-              "method": "egg",
-              "level": 0
-            },
-            {
-              "versionGroup": "black-2-white-2",
-              "method": "egg",
-              "level": 0
-            },
-            {
-              "versionGroup": "x-y",
-              "method": "egg",
-              "level": 0
-            },
-            {
-              "versionGroup": "omega-ruby-alpha-sapphire",
-              "method": "egg",
-              "level": 0
-            },
-            {
-              "versionGroup": "sun-moon",
-              "method": "egg",
-              "level": 0
-            },
-            {
-              "versionGroup": "ultra-sun-ultra-moon",
-              "method": "egg",
-              "level": 0
-            },
-            {
-              "versionGroup": "lets-go-pikachu-lets-go-eevee",
-              "method": "level-up",
-              "level": 10
-            },
-            {
-              "versionGroup": "sword-shield",
-              "method": "egg",
-              "level": 0
-            },
-            {
-              "versionGroup": "brilliant-diamond-shining-pearl",
-              "method": "egg",
-              "level": 0
-            }
-          ]
-        },
-        {
-          "slug": "sludge-bomb",
-          "details": [
-            {
-              "versionGroup": "gold-silver",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "crystal",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "ruby-sapphire",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "emerald",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "firered-leafgreen",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "diamond-pearl",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "platinum",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "heartgold-soulsilver",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "black-white",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "colosseum",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "xd",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "black-2-white-2",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "x-y",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "omega-ruby-alpha-sapphire",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "sun-moon",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "ultra-sun-ultra-moon",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "lets-go-pikachu-lets-go-eevee",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "sword-shield",
-              "method": "machine",
-              "level": 0
-            },
-            {
-              "versionGroup": "brilliant-diamond-shining-pearl",
-              "method": "machine",
-              "level": 0
             }
           ]
         }
@@ -16945,6 +16500,46 @@
       "power": 40,
       "damageClass": "special",
       "generation": 6,
+      "pastTypes": []
+    },
+    "scratch": {
+      "id": 10,
+      "type": "normal",
+      "power": 40,
+      "damageClass": "physical",
+      "generation": 1,
+      "pastTypes": []
+    },
+    "quick-attack": {
+      "id": 98,
+      "type": "normal",
+      "power": 40,
+      "damageClass": "physical",
+      "generation": 1,
+      "pastTypes": []
+    },
+    "iron-tail": {
+      "id": 231,
+      "type": "steel",
+      "power": 100,
+      "damageClass": "physical",
+      "generation": 2,
+      "pastTypes": []
+    },
+    "ancient-power": {
+      "id": 246,
+      "type": "rock",
+      "power": 60,
+      "damageClass": "special",
+      "generation": 2,
+      "pastTypes": []
+    },
+    "slam": {
+      "id": 21,
+      "type": "normal",
+      "power": 80,
+      "damageClass": "physical",
+      "generation": 1,
       "pastTypes": []
     }
   },

@@ -21,7 +21,8 @@ The app has no dependencies and makes no external requests. Everything works wit
 ## Learn from zero to hero
 
 - **Ground Zero:** six guided chapters, from the Fire/Water/Grass triangle to dual-type multiplication. Read first, practice second. A lesson completes at 75% correct without hints. The later-types chapter is unavailable in Generation I. Completing every available chapter opens graduation and the Type Hero challenge, with an option to revisit lessons.
-- **Practice arena:** attack matchups, incoming damage, immunity detective, dual types, adaptive review, and a 20-question challenge without hints. Immunity detective mixes immune attacks with similar attacks that land. Number keys answer; Enter advances after feedback when focus is outside a button.
+- **Practice arena:** attack matchups, incoming damage, immunity detective, dual types, adaptive review, move-choice battles, and a 20-question challenge without hints. Immunity detective mixes immune attacks with similar attacks that land. Number keys answer; Enter advances after feedback when focus is outside a button.
+- **Pick the move:** eight battles with three or four damaging moves verified for the exact Pokémon and a named game. Choose the highest type multiplier; tied best moves count equally. Feedback reveals every option's multiplier and learnset sources. Power, STAB, stats, abilities, and move effects are excluded. Battle scores persist separately from multiplier accuracy/mastery; a missed choice adds the selected matchup to focused practice without counting as a wrong numerical answer.
 - **Personal study plan:** home shows up to three priority types, with reasons drawn from mistakes, hints, and due reviews in the selected era. A six-question session revisits those types, including previously attempted dual-type matchups. New learners get familiar Fire/Water/Grass questions first.
 - **Type Hero badge:** get 16 of 20 challenge questions correct without hints (80%) to earn a badge for that era. Best score and attempt history persist across refreshes and backups; a later lower score does not revoke an earned badge. The badge is a challenge milestone, separate from full chart mastery.
 - **Type library:** browse all available types, see offensive and defensive matchups separately, and use story-based mnemonics.
@@ -32,7 +33,7 @@ The app has no dependencies and makes no external requests. Everything works wit
 
 The interface features animated Pokémon sprites, an original pixel-art Route 01 meadow, illustrated lesson cards, a battle field, and species spotlights in the type library. Choose Pikachu, Bulbasaur, Charmander, Squirtle, or Eevee as your study buddy; your choice is saved on this device.
 
-Soft, original musical cues accompany starting practice, choosing a buddy, answers, and finishing a session. They start at 25% volume and play only after your interaction. There is no background music, autoplay, or hover audio. Use **Sound on/off** in the header to mute instantly; the adjacent arrow opens **Sound settings**, with a volume slider and a preview. Preferences persist on this device. The browser synthesizes the sounds locally; no audio downloads are required. Cues fade gently, repeated clicks are throttled, and sound stops when the page is hidden.
+Soft, original musical cues accompany starting practice, choosing a buddy, answers, and finishing a session. Tiny Water splashes, Fire crackles, Electric sparks, and other elemental cues play only after an answer; a short fanfare celebrates passing the Type Hero challenge. They start at 25% volume and play only after your interaction. There is no background music, autoplay, or hover audio. Use **Sound on/off** in the header to mute instantly; the adjacent arrow opens **Sound settings**, with a volume slider, separate **Elemental battle effects** switch, and chime/Water previews. Turning off effects retains the answer chimes. Preferences persist on this device. The browser synthesizes the sounds locally; no audio downloads are required. Cues fade gently, repeated clicks are throttled, and sound stops when the page is hidden.
 
 Use the sun/moon button in the header to pause or resume animations. System reduced-motion preferences automatically use still sprites. Both animated GIFs and still PNGs are bundled locally, so the app still works offline with no third-party image requests.
 
@@ -67,9 +68,13 @@ Both choices preserve the other game eras and your study buddy/settings. **Undo 
 
 Progress is stored in this browser's local storage under `type-dojo-v1`. Each chart era has its own lessons, XP, and matchup records. Use a consistent origin (host and port) to keep using the same save. Clearing browser data removes local progress; export a backup first.
 
-Three consecutive correct, unaided answers mark a matchup mastered. Misses and hints reset the unaided streak. Review intervals are 1 minute, 10 minutes, 1 day, 3 days, and then 7 days. New, missed, and overdue cells receive extra weight; sessions sample available result categories and do not repeat a question within a session. The standard ten-question immunity session contains five 0× matchups and five nonzero contrasts, in shuffled order, including resistance, neutral, and super-effective results.
+New mastery requires three consecutive correct, unaided answers, including a successful recall at least 12 hours after the previous answer once two are correct. Rapid repeats alone do not grant mastery. Misses and hints reset both the streak and recall requirement. Previously earned mastery is preserved when upgrading old saves. Review intervals are 1 minute, 10 minutes, 1 day, 3 days, and then 7 days. New, missed, and overdue cells receive extra weight; sessions sample available result categories and do not repeat a question within a session. The standard ten-question immunity session contains five 0× matchups and five nonzero contrasts, in shuffled order, including resistance, neutral, and super-effective results.
 
-Study priorities include types on either side of your attempted matchups, counting a type once per question even if it appears on both sides. Mistakes and hints on unmastered matchups rank ahead of ordinary refreshers. Mastered, up-to-date matchups leave the priority list; due reviews return. The six-question plan covers the displayed priority types and updates as you answer. It does not create unseen dual-type exercises for beginners. With little or no history, the home copy explains that the plan is still developing instead of claiming to know your weaknesses.
+Wrong numerical answers retain the selected multiplier and counts in backups. Feedback explains the specific mistake, such as reversing attack direction, overlooking immunity, or combining two defending types incorrectly. Focus sessions seed the three most recent unresolved mistakes, even when they fall outside the broader priority types, then add relevant contrasting matchups and other practice. Personal review includes attempted dual-type matchups as well as single types. Move-choice mistakes also enter the plan; a correct unaided multiplier answer resolves that retry.
+
+All dual-type history uses a shared canonical key: Grass/Water and Water/Grass share the same record. Existing duplicate records merge during load, import, and undo validation. Attempts, correct counts, hint counts, and mistake history combine; the latest answer supplies the streak and recall state, the earlier due time stays available for review, and XP, lessons, and badges are retained. Exporting after upgrading produces the normalized save. Old version-1 backups remain supported.
+
+Study priorities include types on either side of your attempted matchups, counting a type once per question even if it appears on both sides. Mistakes and hints on unmastered matchups rank ahead of ordinary refreshers. Mastered, up-to-date matchups leave the priority list; due reviews return. The six-question plan prioritizes exact unresolved mistakes, then broader priority types, and updates as you answer. It does not create unseen dual-type exercises for beginners. With little or no history, the home copy explains that the plan is still developing instead of claiming to know your weaknesses.
 
 Challenge history is saved separately in each era's progress bucket. Existing version-1 backups without challenge history remain compatible and receive an empty challenge record. A full era reset clears its badge and scores; restarting lessons only retains them. Undo restores the corresponding saved progress.
 
@@ -82,6 +87,10 @@ index.html          Accessible app shell
 server.js           Local static server (Node built-ins only)
 src/data.js         Chart rules, generation overrides, mnemonics, lessons
 src/progress.js     Adaptive sessions, mastery, save validation
+src/matchup.js      Shared canonical matchup keys
+src/battles.js      Verified move-choice sessions and mistake explanations
+src/battle-data.js  Offline battle catalog generated from saved evidence
+src/battle-learning.css Move-choice cards, exact retries, and recall labels
 src/app.js          UI and interaction flows
 src/styles.css      Responsive interface and reduced-motion support
 src/pokemon-theme.css Pokémon scenery, sprite layout, and battle styling
@@ -98,6 +107,10 @@ tests/moves.test.js Learnset, game-era, and fixed-damage exception checks
 tests/reset.test.js Scoped resets, persistent undo, and preservation of other eras
 tests/sound.test.js Quiet playback, mute, visibility, and audio failure handling
 tests/study.test.js Mixed immunity drills, graduation, study priorities, badges, and save migration
+tests/learning.test.js Canonical migration, delayed recall, and exact mistake contrasts
+tests/battles.test.js Species/game learnsets, tied choices, and separate battle scoring
+scripts/build-battle-data.js Rebuild battle catalog using bundled evidence (Node, offline)
+scripts/expand-battle-evidence.py Refresh the extra public PokéAPI evidence (Python, network required)
 assets/data/move-evidence.json Extracted source evidence for offline verification
 ```
 

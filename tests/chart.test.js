@@ -3,6 +3,8 @@ import './moves.test.js';
 import './reset.test.js';
 import './sound.test.js';
 import './study.test.js';
+import './learning.test.js';
+import './battles.test.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {typesFor,pairsFor,effectiveness,dualEffectiveness,mnemonic,LESSONS} from '../src/data.js';
@@ -56,12 +58,13 @@ test('Every legal matchup has a memory explanation',()=>{
  assert.match(mnemonic('Ghost','Psychic','1'),/0×/);
  assert.match(mnemonic('Dark','Steel','2'),/Generations II–V/);
 });
-test('Mastery requires three consecutive unaided correct answers',()=>{
+test('Mastery requires three consecutive unaided correct answers with delayed recall',()=>{
  const b=freshState().eras['6'];let r;
  for(let i=0;i<3;i++)r=recordAnswer(b,'Water>Fire',true,false,1000+i);
- assert.equal(mastered(r),true);assert.equal(r.due,1002+86400000);assert.equal(b.xp,30);
- r=recordAnswer(b,'Water>Fire',true,true,2000);assert.equal(mastered(r),false);assert.equal(r.streak,0);assert.equal(b.xp,34);
- r=recordAnswer(b,'Water>Fire',false,false,3000);assert.equal(r.correct,4);assert.equal(r.attempts,5);assert.equal(due(r,3000),true);
+ assert.equal(mastered(r),false);assert.equal(r.due,1002+86400000);assert.equal(b.xp,30);
+ r=recordAnswer(b,'Water>Fire',true,false,1002+86400000);assert.equal(mastered(r),true);
+ r=recordAnswer(b,'Water>Fire',true,true,1002+86400001);assert.equal(mastered(r),false);assert.equal(r.streak,0);assert.equal(b.xp,44);
+ r=recordAnswer(b,'Water>Fire',false,false,1002+86400002);assert.equal(r.correct,5);assert.equal(r.attempts,6);assert.equal(due(r,1002+86400002),true);
 });
 test('Generation buckets, lesson progress, and dual stats are independent',()=>{
  const state=freshState(),b=state.eras['6'];recordAnswer(b,'Water>Fire',true);recordAnswer(b,'Rock>Fire+Flying',true);

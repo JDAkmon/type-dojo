@@ -1,0 +1,15 @@
+.move-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:24px 0}
+.move-option{position:relative;display:flex;align-items:center;flex-direction:column;gap:10px;padding:19px 15px;border:2px solid #e4e8d6;border-radius:12px;background:#fffef7;color:#4c6756;transition:background .15s,border-color .15s,translate .15s;min-width:0}
+.move-option>b{font-size:17px}.move-option .key{position:absolute;left:10px;top:10px;font-size:10px;color:#819278}
+.move-option:hover:not(:disabled),.move-option:focus-visible:not(:disabled){background:color-mix(in srgb,var(--move-type) 13%,#fffef7);border-color:var(--move-type);translate:0 -2px}
+.move-option:focus-visible{outline:3px solid #927ebd;outline-offset:3px}
+.move-option.correct{background:#edf6df;border-color:#97b97b}.move-option.incorrect{background:#fff0e6;border-color:#cf9c81}
+.move-outcome{font-size:11px;color:#6e805f;line-height:1.5}
+.move-choice-panel .feedback{margin-bottom:28px}.move-choice-panel .move-info{margin:8px 0}
+.mistake-reminder{display:flex;align-items:center;gap:10px;padding:12px 15px;background:#f7efdc;border:1px solid #e1cc9b;border-radius:9px;text-align:left;color:#887449;font-size:12px;line-height:1.6}
+.mistake-reminder .icon{flex-shrink:0}.specific-mistakes{padding:15px 20px;margin:15px 0;border-radius:10px;background:#fbf3df;color:#6c785b;font-size:13px}
+.specific-mistakes p{display:flex;justify-content:space-between;gap:12px;margin:10px 0}.specific-mistakes small{color:#948462;font-size:11px}
+.recall-note{display:block;color:#95774f;font-size:10px;margin-top:3px}
+.battle-score{display:flex;align-items:center;gap:15px;flex-wrap:wrap;padding:18px 24px;margin:20px 0;background:#f2f7e9;border:1px solid #dce5cb;border-radius:12px;color:#5d7656}.battle-score small{width:100%;color:#809271}
+@media(max-width:600px){.move-options{gap:9px}.move-option{padding:22px 8px 14px}.move-option>b{font-size:14px}.specific-mistakes p{flex-direction:column;gap:3px}.battle-score{padding:16px}.move-choice-panel .battle-types{gap:8px}}
+@media(prefers-reduced-motion:reduce){.move-option{transition:none}.move-option:hover:not(:disabled){translate:none}}

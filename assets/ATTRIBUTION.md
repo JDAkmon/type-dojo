@@ -10,4 +10,4 @@ The pixel-art landscape and interface decorations are original vector artwork cr
 
 ## Move and learnset data
 
-Species-specific move examples and their game-version learning methods come from [PokéAPI's official API data mirror](https://github.com/PokeAPI/api-data). The source endpoint URLs are recorded in `src/move-examples.js`; relevant raw learnset and move records are extracted in `data/move-evidence.json` so tests work offline. The data repository's BSD license is preserved in `data/SOURCE-LICENSE.txt`.
+Species-specific move examples and their game-version learning methods come from [PokéAPI's official API data mirror](https://github.com/PokeAPI/api-data). The source endpoint URLs are recorded in `src/move-examples.js` and the generated `src/battle-data.js`; relevant raw learnset and move records are extracted in `data/move-evidence.json` so tests work offline. Move-choice battles use the exact species and a named game, including historical move types. The data repository's BSD license is preserved in `data/SOURCE-LICENSE.txt`.
