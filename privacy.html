@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="How Type Dojo stores learning progress and handles hosting, advertising, and privacy choices.">
+  <title>Privacy · Type Dojo</title>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="stylesheet" href="./src/site-info.css">
+</head>
+<body class="info-page">
+  <a class="info-brand" href="./#home"><span class="info-ball" aria-hidden="true"></span>type<span>dojo</span></a>
+  <main>
+    <h1>Your learning. Your device.</h1>
+    <p class="info-intro">Type Dojo is a Pokémon type-learning tool for a general audience of teens and adults. This page explains the app's data storage and planned advertising.</p>
+    <p class="updated">Last updated: October 16, 2026</p>
+    <section class="info-card">
+      <h2>Learning progress and preferences</h2>
+      <p>The app stores your answers, review schedule, XP, completed lessons, badge history, study buddy, sound preferences, and latest reset backup in your browser's local storage. It does not require a learner account.</p>
+      <p>Use My progress to export a backup or reset an era. A reset keeps an undo copy. To remove all Type Dojo saves and preferences, clear this site's data in your browser settings. Other copies, such as downloaded backups or data in a different browser, must be removed separately.</p>
+      <p>Exporting creates a file on your device. Importing reads the file you select in your browser. Type Dojo has no application server that receives those backup files.</p>
+    </section>
+    <h2>Hosting and external links</h2>
+    <p>GitHub Pages hosts this site. GitHub processes information needed to deliver the website, such as request and network information, under the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="noreferrer" target="_blank">GitHub Privacy Statement</a>.</p>
+    <p>Sprites, move data, and the training tool are served with the site. Source links and other external links take you to third-party websites governed by their own policies. Type Dojo does not include a separate analytics service in this release.</p>
+    <h2>Advertising</h2>
+    <p id="ad-status">AdSense is not active in this release. The prepared placement does not load Google's advertising script while advertising is switched off.</p>
+    <p>If AdSense is enabled, a space labeled Advertisement on the overview may show a Google ad. Google and other participating advertising vendors may use cookies and similar technologies to serve and measure ads, including ads based on previous visits to this or other websites where permitted by your choices. See <a href="https://policies.google.com/technologies/ads" rel="noreferrer" target="_blank">how Google uses advertising technologies</a> and <a href="https://policies.google.com/privacy" rel="noreferrer" target="_blank">Google's Privacy Policy</a>.</p>
+    <p>You can manage Google's personalized advertising at <a href="https://myadcenter.google.com/" rel="noreferrer" target="_blank">My Ad Center</a>, manage cookies in your browser, and visit <a href="https://optout.aboutads.info/" rel="noreferrer" target="_blank">YourAdChoices</a> for participating vendors. These options do not necessarily remove ads.</p>
+    <p>When enabled and available, the site's Privacy &amp; cookie settings control reopens Google's consent message. Google's own regional privacy messages provide applicable consent and opt-out options. The placement remains disabled until the publisher has configured consent messaging.</p>
+    <h2>Audience</h2>
+    <p>Type Dojo is intended for a general audience of teens and adults. The app does not ask for a name, date of birth, email address, or payment information.</p>
+    <h2>Questions and changes</h2>
+    <p>Contact the maintainer through the <a href="https://github.com/JDAkmon/type-dojo/issues" rel="noreferrer" target="_blank">project's GitHub issues</a>. Issues are public; do not post private information there. This page will be updated when the site's data handling or advertising changes.</p>
+  </main>
+  <footer><a href="./#home">Back to training</a><a href="./about.html">About &amp; contact</a></footer>
+  <script type="module">
+    import {AD_CONFIG} from './src/ads-config.js';
+    import {adsEnabled} from './src/ads.js';
+    if(adsEnabled(AD_CONFIG))document.getElementById('ad-status').textContent='AdSense is enabled for a labeled placement on the overview. The training screens do not request ad units.';
+  </script>
+</body>
+</html>

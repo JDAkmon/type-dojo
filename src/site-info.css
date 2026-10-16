@@ -1,0 +1,17 @@
+.ad-placement[hidden],.ad-privacy-choices[hidden]{display:none!important}
+.ad-placement{margin:0 40px 28px 275px;padding:16px 20px 20px;border:1px solid #e8e4d9;border-radius:10px;background:#fffef9;max-width:970px;text-align:center}
+.ad-label{display:block;margin-bottom:12px;font-size:10px;letter-spacing:1.3px;text-transform:uppercase;color:#899080}
+.ad-unit{width:100%;min-height:90px}.ad-unit .adsbygoogle{min-height:90px}
+.ad-placement:has(ins[data-ad-status="unfilled"]){display:none}
+.ad-privacy-choices{display:block;margin:0 40px 22px 275px;font:inherit;font-size:11px;color:#65775c;text-decoration:underline;cursor:pointer}
+footer a{color:#6d7e65;text-decoration:underline;text-underline-offset:3px}
+.info-page{max-width:850px;margin:0 auto;padding:36px 24px 60px;color:#435446;background:#faf8f1;font-family:system-ui,sans-serif;line-height:1.75}
+.info-page .info-brand{display:inline-flex;align-items:center;gap:10px;font-size:24px;font-weight:750;text-decoration:none;color:#435446}
+.info-page .info-ball{height:27px;width:27px;border:2px solid #485662;border-radius:50%;background:linear-gradient(#ef7764 0 46%,#485662 46% 54%,#fffdf4 54%)}
+.info-page main{padding:30px 0;max-width:none}.info-page h1{font-size:34px;line-height:1.2;margin:16px 0}.info-page h2{font-size:21px;line-height:1.4;margin:28px 0 10px}
+.info-page p,.info-page li{font-size:15px}.info-page p{margin:14px 0}.info-page a{color:#627b51;text-underline-offset:3px}
+.info-page .info-intro{color:#7c896d;font-size:16px}.info-page .info-card{background:#fffef9;border:1px solid #e3e6d5;border-radius:12px;padding:22px;margin:22px 0}
+.info-page .info-card h2{margin-top:0}.info-page .updated{font-size:12px;color:#8b937f}.info-page footer{display:flex;gap:20px;flex-wrap:wrap;border-top:1px solid #e5e4d6;padding-top:20px}
+@media(max-width:1200px){.ad-placement,.ad-privacy-choices{margin-left:236px;margin-right:26px}}
+@media(max-width:950px){.ad-placement,.ad-privacy-choices{margin-left:211px}}
+@media(max-width:680px){.ad-placement{margin:0 18px 24px;padding:15px 10px}.ad-privacy-choices{margin:0 18px 22px}.ad-unit,.ad-unit .adsbygoogle{min-height:100px}.info-page{padding:25px 20px 40px}.info-page h1{font-size:29px}}

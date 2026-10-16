@@ -6,6 +6,8 @@ A friendly, offline-first Pokémon type trainer. Start with no knowledge and bui
 
 ## GitHub Pages
 
+AdSense ownership verification is configured, with display ads disabled pending an ad-unit slot, site approval, and consent messaging. See [AD_SETUP.md](AD_SETUP.md) for setup and the companion domain-root verification files. Public privacy and about/contact pages describe the site and its local progress storage.
+
 Pushes to `main` run the game and deployment checks, build the static `_site` folder, and publish it to GitHub Pages through `.github/workflows/pages.yml`. The workflow can also be started manually from the repository's Actions tab. Pages uses **GitHub Actions** as its publishing source. No server, API keys, or paid hosting is needed.
 
 Run `npm test` and `npm run build` to verify the release locally. `_site` contains only the site entry point, favicon, app source, public assets, and `.nojekyll`; generated output is ignored by Git. Asset URLs support both a local domain root and the `/type-dojo/` project path.
