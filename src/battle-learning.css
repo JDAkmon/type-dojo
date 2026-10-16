@@ -1,3 +1,5 @@
+.type-word{display:inline;white-space:nowrap}
+.type-text-emoji{display:inline-block;margin-right:.22em;font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;font-size:.95em;line-height:1;vertical-align:-.04em}
 .move-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:24px 0}
 .move-option{position:relative;display:flex;align-items:center;flex-direction:column;gap:10px;padding:19px 15px;border:2px solid #e4e8d6;border-radius:12px;background:#fffef7;color:#4c6756;transition:background .15s,border-color .15s,translate .15s;min-width:0}
 .move-option>b{font-size:17px}.move-option .key{position:absolute;left:10px;top:10px;font-size:10px;color:#819278}
