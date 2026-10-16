@@ -46,5 +46,5 @@ export function representative(type,era) {
 }
 export function byId(id) { return POKEMON.find(p=>p.id===Number(id)); }
 export function spriteUrl(pokemon,animate=true) {
-  return `/assets/pokemon/${pokemon.id}.${animate?'gif':'png'}`;
+  return new URL(`../assets/pokemon/${pokemon.id}.${animate?'gif':'png'}`,import.meta.url).href;
 }

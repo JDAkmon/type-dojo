@@ -5,6 +5,7 @@ import './sound.test.js';
 import './study.test.js';
 import './learning.test.js';
 import './battles.test.js';
+import './pages.test.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {typesFor,pairsFor,effectiveness,dualEffectiveness,mnemonic,LESSONS} from '../src/data.js';

@@ -2,6 +2,16 @@
 
 A friendly, offline-first Pokémon type trainer. Start with no knowledge and build toward confident single- and dual-type decisions. No account, API keys, package installation, or paid services required.
 
+**Play online:** [Type Dojo](https://jdakmon.github.io/type-dojo/) · [Source on GitHub](https://github.com/JDAkmon/type-dojo)
+
+## GitHub Pages
+
+Pushes to `main` run the game and deployment checks, build the static `_site` folder, and publish it to GitHub Pages through `.github/workflows/pages.yml`. The workflow can also be started manually from the repository's Actions tab. Pages uses **GitHub Actions** as its publishing source. No server, API keys, or paid hosting is needed.
+
+Run `npm test` and `npm run build` to verify the release locally. `_site` contains only the site entry point, favicon, app source, public assets, and `.nojekyll`; generated output is ignored by Git. Asset URLs support both a local domain root and the `/type-dojo/` project path.
+
+Progress stays in each browser's local storage. Your localhost save and the hosted site's save are separate: use **My progress → Export backup** on localhost, then **Import backup** on the hosted site to carry your journey over. Import the file using the site's existing restore confirmation.
+
 ## Run locally
 
 Install Node.js 20 or newer, then open a terminal in this repository:
