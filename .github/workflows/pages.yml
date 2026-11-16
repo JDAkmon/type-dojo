@@ -24,8 +24,14 @@ jobs:
           node-version: '22'
       - name: Test game rules and learning features
         run: npm test
+      - name: Install browser test tools
+        run: npm ci
       - name: Build static site
         run: npm run build
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Test mobile layouts and training flows
+        run: npm run test:browser
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
       - name: Upload site

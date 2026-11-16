@@ -1,6 +1,6 @@
 # Type Dojo
 
-A friendly, offline-first Pokémon type trainer. Start with no knowledge and build toward confident single- and dual-type decisions. No account, API keys, package installation, or paid services required.
+A friendly, offline-first Pokémon type trainer. Start with no knowledge and build toward confident single- and dual-type decisions. No account, API keys, or paid services required. Running the app needs no package installation; automated browser checks use a development-only Playwright dependency.
 
 **Play online:** [Type Dojo](https://jdakmon.github.io/type-dojo/) · [Source on GitHub](https://github.com/JDAkmon/type-dojo)
 
@@ -10,7 +10,7 @@ AdSense ownership verification is configured, with display ads disabled pending 
 
 Pushes to `main` run the game and deployment checks, build the static `_site` folder, and publish it to GitHub Pages through `.github/workflows/pages.yml`. The workflow can also be started manually from the repository's Actions tab. Pages uses **GitHub Actions** as its publishing source. No server, API keys, or paid hosting is needed.
 
-Run `npm test` and `npm run build` to verify the release locally. `_site` contains only the site entry point, favicon, app source, public assets, and `.nojekyll`; generated output is ignored by Git. Asset URLs support both a local domain root and the `/type-dojo/` project path.
+Run `npm test` and `npm run build` to verify the release locally. For browser regressions, run `npm ci`, `npx playwright install chromium`, then `npm run test:browser` after building. CI runs these checks before publishing. You can set `PLAYWRIGHT_EXECUTABLE_PATH` to an installed Chrome binary for local testing. `_site` contains only the site entry point, favicon, app source, public assets, and `.nojekyll`; generated output is ignored by Git. Asset URLs support both a local domain root and the `/type-dojo/` project path.
 
 Progress stays in each browser's local storage. Your localhost save and the hosted site's save are separate: use **My progress → Export backup** on localhost, then **Import backup** on the hosted site to carry your journey over. Import the file using the site's existing restore confirmation.
 
@@ -74,11 +74,11 @@ Remakes follow the generation in which the remake was released. For example, Fir
 - **Ground Zero lessons only** clears completed chapters and returns the journey button to **Start from Ground Zero**, retaining practice answers, mastery, reviews, XP, and training days.
 - **All progress in this era** clears all of the above for the selected era. The same choice is available through **My progress → Reset this era**.
 
-Both choices preserve the other game eras and your study buddy/settings. **Undo last reset** restores the most recent saved copy, even after refreshing. Undoing a lessons-only restart preserves practice earned since the restart. Undoing a full era reset replaces any new progress in that era with the pre-reset copy; its confirmation explains this. Export a backup from My progress if you want to retain multiple snapshots. Progress changes sync between open tabs of the same origin.
+Both choices preserve the other game eras and your study buddy/settings. **Undo last reset** restores the most recent saved copy, even after refreshing. Undoing a lessons-only restart preserves practice earned since the restart. Undoing a full era reset replaces any new progress in that era with the pre-reset copy; its confirmation explains this. Export a backup from My progress if you want to retain multiple snapshots. Progress changes sync between open tabs of the same origin. Each tab keeps its own active quiz and selected era; another tab’s generation selection does not end your session.
 
 ## Progress model
 
-Progress is stored in this browser's local storage under `type-dojo-v1`. Each chart era has its own lessons, XP, and matchup records. Use a consistent origin (host and port) to keep using the same save. Clearing browser data removes local progress; export a backup first.
+Progress is stored in this browser's local storage under `type-dojo-v1`. Each chart era has its own lessons, XP, and matchup records. Use a consistent origin (host and port) to keep using the same save. Active quizzes are saved in per-tab session storage and resume after a refresh, including question order, hints, answers, and type-specific practice. Closing a tab may discard its unfinished quiz; completed answers remain in progress. Lesson completion and challenge badges are saved on the final answer, before opening results. If a save fails validation, its exact original contents are archived under `type-dojo-recovery-v1` and can be downloaded from the recovery notice. If the archive cannot be written, the unreadable original is not overwritten. Clearing browser data removes local progress; export a backup first.
 
 New mastery requires three consecutive correct, unaided answers, including a successful recall at least 12 hours after the previous answer once two are correct. Rapid repeats alone do not grant mastery. Misses and hints reset both the streak and recall requirement. Previously earned mastery is preserved when upgrading old saves. Review intervals are 1 minute, 10 minutes, 1 day, 3 days, and then 7 days. New, missed, and overdue cells receive extra weight; sessions sample available result categories and do not repeat a question within a session. The standard ten-question immunity session contains five 0× matchups and five nonzero contrasts, in shuffled order, including resistance, neutral, and super-effective results.
 

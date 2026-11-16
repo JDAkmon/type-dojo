@@ -150,7 +150,7 @@ export function recentMistakes(bucket,era,limit=3){
   return Object.entries(bucket.records).filter(([,r])=>(r.streak===0||r.moveMisses)&&r.lastMistake).sort((a,b)=>b[1].lastMistake.at-a[1].lastMistake.at).map(([key,record])=>{const [a,def]=key.split('>'),ds=def.split('+');return {key,a,ds,value:dualEffectiveness(a,ds,era),record};}).filter(q=>[q.a,...q.ds].every(t=>ts.includes(t))).slice(0,limit);
 }
 export function validateState(value) {
-  if(!value||value.version!==1||!ERAS[value.era]||!value.eras) throw new Error('This is not a Type Dojo backup.');
+  if(!value||value.version!==1||!['1','2','6'].includes(value.era)||!value.eras) throw new Error('This is not a Type Dojo backup.');
   for(const era of Object.keys(ERAS)) {
     const bucket=value.eras[era],ts=typesFor(era);
     if(!bucket||!bucket.records||typeof bucket.records!=='object'||Array.isArray(bucket.records)||!Array.isArray(bucket.lessons)||!Array.isArray(bucket.days)||!Number.isSafeInteger(bucket.xp)||bucket.xp<0) throw new Error('Invalid progress data.');

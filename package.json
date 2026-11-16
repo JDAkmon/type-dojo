@@ -4,6 +4,17 @@
   "private": true,
   "type": "module",
   "description": "An offline-first Pokémon type effectiveness learning tool.",
-  "scripts": { "start": "node server.js", "test": "node tests/chart.test.js", "build": "node scripts/build-site.js", "build:ad-root": "node scripts/build-ad-root.js" },
-  "engines": { "node": ">=20" }
+  "scripts": {
+    "start": "node server.js",
+    "test": "node tests/chart.test.js",
+    "build": "node scripts/build-site.js",
+    "build:ad-root": "node scripts/build-ad-root.js",
+    "test:browser": "node tests/browser.test.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
+  }
 }
