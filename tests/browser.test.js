@@ -49,6 +49,29 @@ async function correctAnswer(page,era='6'){
 }
 try{
   browser=await chromium.launch(launchOptions);
+  await run('Daily gym preserves first score, resumes and copies a share score',async page=>{
+    await page.goto(base);await page.locator('[data-mode="daily"]').click();
+    assert.equal(await page.locator('[data-action="hint"]').count(),0);
+    for(let i=0;i<5;i++){await correctAnswer(page);if(i===2){await page.reload();assert.equal((await session(page)).answers.length,3);}await page.locator('[data-action="next"]').click();}
+    const day=(await session(page)).dailyDay;assert.equal((await saved(page)).eras['6'].daily[day],5);
+    await page.evaluate(()=>Object.defineProperty(navigator,'clipboard',{value:{writeText:async text=>{window.sharedScore=text;}}}));
+    await page.locator('[data-action="share-daily"]').click();assert.match(await page.evaluate(()=>window.sharedScore),/5\/5/);
+    await page.locator('[data-action="again"]').click();
+    for(let i=0;i<5;i++){const q=(await session(page)).questions[i];await page.locator(`[data-answer="${q.value===0?1:0}"]`).click();await page.locator('[data-action="next"]').click();}
+    assert.equal((await saved(page)).eras['6'].daily[day],5);
+  });
+  await run('Starter evolution renders all stages with local still sprites',async page=>{
+    await page.goto(base);
+    for(const stage of [0,1,2]){
+      await page.evaluate(({key,stage})=>{const s=JSON.parse(localStorage.getItem(key))||{version:1,era:'6',eras:Object.fromEntries(['1','2','6'].map(e=>[e,{records:{},lessons:[],xp:0,days:[],challenge:null,battles:{attempts:0,correct:0}}]))};s.eras['6'].buddyStage=stage;localStorage.setItem(key,JSON.stringify(s));},{key:STORAGE_KEY,stage});
+      await page.reload();await page.locator('[data-buddy="7"]').click();
+      assert.match(await page.locator('.evolution-card>b').textContent(),new RegExp(['Squirtle','Wartortle','Blastoise'][stage]));
+      await page.waitForFunction(()=>[...document.images].every(i=>i.complete));assert.equal(await page.evaluate(()=>[...document.images].filter(i=>!i.naturalWidth).length),0);
+    }
+    await page.setViewportSize({width:390,height:844});assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+    if(process.env.AUDIT_SCREENSHOTS){await mkdir(process.env.AUDIT_SCREENSHOTS,{recursive:true});await page.screenshot({path:path.join(process.env.AUDIT_SCREENSHOTS,'daily-evolution-mobile.png'),fullPage:true});}
+  });
+
   await run('Mobile library and navigation fit 320px and 390px; desktop also fits',async page=>{
     for(const width of [320,390,1365]){
       await page.setViewportSize({width,height:844});

@@ -1,3 +1,4 @@
+import './journey.test.js';
 import './pokemon.test.js';
 import './moves.test.js';
 import './reset.test.js';

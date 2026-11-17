@@ -438,5 +438,55 @@
     "file": "15.gif",
     "source": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/15.gif",
     "bytes": 27127
+  },
+  {
+    "file": "2.png",
+    "source": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png",
+    "bytes": 870
+  },
+  {
+    "file": "2.gif",
+    "source": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/2.gif",
+    "bytes": 40287
+  },
+  {
+    "file": "3.png",
+    "source": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png",
+    "bytes": 1531
+  },
+  {
+    "file": "3.gif",
+    "source": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/3.gif",
+    "bytes": 125309
+  },
+  {
+    "file": "5.png",
+    "source": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/5.png",
+    "bytes": 832
+  },
+  {
+    "file": "5.gif",
+    "source": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/5.gif",
+    "bytes": 28809
+  },
+  {
+    "file": "8.png",
+    "source": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/8.png",
+    "bytes": 946
+  },
+  {
+    "file": "8.gif",
+    "source": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/8.gif",
+    "bytes": 35169
+  },
+  {
+    "file": "9.png",
+    "source": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/9.png",
+    "bytes": 1170
+  },
+  {
+    "file": "9.gif",
+    "source": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/9.gif",
+    "bytes": 121970
   }
 ]

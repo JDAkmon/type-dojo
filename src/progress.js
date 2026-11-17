@@ -1,7 +1,8 @@
+import {validDay,evolutionStage} from './journey.js';
 import { ERAS, typesFor, pairsFor, dualEffectiveness, LESSONS } from './data.js';
 import { matchupKey, normalizeKey } from './matchup.js';
 export const STORAGE_KEY='type-dojo-v1';
-const freshBucket=()=>({records:{},lessons:[],xp:0,days:[],challenge:null,battles:{attempts:0,correct:0}});
+const freshBucket=()=>({daily:{},buddyStage:0,records:{},lessons:[],xp:0,days:[],challenge:null,battles:{attempts:0,correct:0}});
 export const freshState=()=>({version:1,era:'6',eras:{'1':freshBucket(),'2':freshBucket(),'6':freshBucket()}});
 export const CHALLENGE_SIZE=20;
 export const CHALLENGE_PASS=16;
@@ -155,6 +156,8 @@ export function validateState(value) {
     const bucket=value.eras[era],ts=typesFor(era);
     if(!bucket||!bucket.records||typeof bucket.records!=='object'||Array.isArray(bucket.records)||!Array.isArray(bucket.lessons)||!Array.isArray(bucket.days)||!Number.isSafeInteger(bucket.xp)||bucket.xp<0) throw new Error('Invalid progress data.');
     if(bucket.lessons.some(id=>!LESSONS.some(l=>l.id===id))||bucket.days.some(d=>typeof d!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(d))) throw new Error('Invalid lesson or activity data.');
+    if(bucket.buddyStage!==undefined&&![0,1,2].includes(bucket.buddyStage))throw new Error('Invalid buddy stage.');
+    if(bucket.daily!==undefined&&(!bucket.daily||typeof bucket.daily!=='object'||Array.isArray(bucket.daily)||Object.entries(bucket.daily).some(([day,score])=>!validDay(day)||!Number.isInteger(score)||score<0||score>5)))throw new Error('Invalid daily scores.');
     const c=bucket.challenge;
     const battles=bucket.battles;
     if(battles!=null&&(!Number.isSafeInteger(battles.attempts)||battles.attempts<0||!Number.isSafeInteger(battles.correct)||battles.correct<0||battles.correct>battles.attempts))throw new Error('Invalid move battle history.');
@@ -185,7 +188,8 @@ export function validateState(value) {
       const lastMistake=[previous.lastMistake,next.lastMistake].filter(Boolean).sort((x,y)=>y.at-x.at)[0]||null;
       records[k]={...latest,attempts:previous.attempts+next.attempts,correct:previous.correct+next.correct,assisted:previous.assisted+next.assisted,due:Math.min(previous.due,next.due),wrongAnswers,lastMistake,moveMisses:previous.moveMisses+next.moveMisses};
     }
-    clean.eras[era]={xp:b.xp,lessons:[...new Set(b.lessons)],days:[...new Set(b.days)],challenge:b.challenge?{attempts:b.challenge.attempts,bestCorrect:b.challenge.bestCorrect,lastCorrect:b.challenge.lastCorrect,lastAt:b.challenge.lastAt,passedAt:b.challenge.passedAt}:null,battles:b.battles?{attempts:b.battles.attempts,correct:b.battles.correct}:{attempts:0,correct:0},records};
+    clean.eras[era]={daily:{...b.daily},buddyStage:b.buddyStage||0,xp:b.xp,lessons:[...new Set(b.lessons)],days:[...new Set(b.days)],challenge:b.challenge?{attempts:b.challenge.attempts,bestCorrect:b.challenge.bestCorrect,lastCorrect:b.challenge.lastCorrect,lastAt:b.challenge.lastAt,passedAt:b.challenge.passedAt}:null,battles:b.battles?{attempts:b.battles.attempts,correct:b.battles.correct}:{attempts:0,correct:0},records};
   }
+  for(const b of Object.values(clean.eras))b.buddyStage=evolutionStage(b);
   return clean;
 }

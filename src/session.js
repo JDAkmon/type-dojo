@@ -1,3 +1,4 @@
+import {dayKey,dailyQuestions} from './journey.js';
 import {ERAS, LESSONS, typesFor, dualEffectiveness} from './data.js';
 import {matchupKey} from './matchup.js';
 import {lessonQuestions, recordChallenge, CHALLENGE_SIZE} from './progress.js';
@@ -5,16 +6,17 @@ import {BATTLE_SETS} from './battle-data.js';
 import {availablePokemon, pokemonTypes} from './pokemon.js';
 
 export const SESSION_KEY = 'type-dojo-session-v1';
-const modes = ['lesson','attack','defense','immunity','dual','review','challenge','focus','moves'];
+const modes = ['lesson','attack','defense','immunity','dual','review','challenge','focus','moves','daily'];
 
 export function makeSession(mode, era, questions, lesson = null, focusType = null) {
-  return {mode, era, questions, lesson, focusType, index:0, answers:[], hint:false, answered:false, finalized:false};
+  return {dailyDay:mode==='daily'?dayKey():null,mode, era, questions, lesson, focusType, index:0, answers:[], hint:false, answered:false, finalized:false};
 }
 
 // Completion belongs to the final answer, not to the results-screen button.
 export function finalizeSession(session, bucket, now = Date.now()) {
   if (session.finalized || session.answers.length !== session.questions.length) return false;
   const correct = session.answers.filter(a => a.correct && !a.assisted).length;
+  if (session.mode === 'daily') {bucket.daily ||= {}; if(!Object.hasOwn(bucket.daily,session.dailyDay))bucket.daily[session.dailyDay]=correct;}
   if (session.mode === 'challenge') recordChallenge(bucket, correct, now);
   if (session.lesson && correct / session.questions.length >= .75 && !bucket.lessons.includes(session.lesson)) {
     bucket.lessons.push(session.lesson);
@@ -51,13 +53,14 @@ export function restoreSession(value) {
     const expected = lessonQuestions(lesson,era);
     if (expected.length !== questions.length || questions.some(q => !expected.some(e => e.key === q.key))) throw new Error('Invalid lesson.');
   }
+  if(mode==='daily' && JSON.stringify(questions)!==JSON.stringify(dailyQuestions(era,value.dailyDay)))throw new Error('Invalid daily questions.');
   if (mode === 'challenge' && questions.length !== CHALLENGE_SIZE) throw new Error('Invalid challenge.');
   if (value.focusType && questions.some(q => q.a !== value.focusType)) throw new Error('Invalid focused session.');
   const {index, answered, hint, finalized} = value;
   if (!Number.isInteger(index) || index < 0 || index > questions.length || typeof answered !== 'boolean' || typeof hint !== 'boolean' || typeof finalized !== 'boolean' || !Array.isArray(value.answers) || value.answers.length !== index + Number(answered) || (index === questions.length && answered)) throw new Error('Invalid session position.');
   const answers = value.answers.map((a,i) => {
     const q = questions[i];
-    if (!a || typeof a.assisted !== 'boolean' || (mode === 'challenge' && a.assisted)) throw new Error('Invalid answer.');
+    if (!a || typeof a.assisted !== 'boolean' || (['challenge','daily'].includes(mode) && a.assisted)) throw new Error('Invalid answer.');
     if (mode === 'moves') {
       const move = q.moves[a.moveIndex];
       if (!move || !Number.isInteger(a.moveIndex)) throw new Error('Invalid move answer.');
@@ -67,5 +70,5 @@ export function restoreSession(value) {
     return {value:a.value, correct:a.value === q.value, assisted:a.assisted};
   });
   if (finalized !== (answers.length === questions.length)) throw new Error('Invalid completion state.');
-  return {...makeSession(mode,era,questions,lesson?.id || null,value.focusType || null), index, answered, hint, finalized, answers};
+  return {...makeSession(mode,era,questions,lesson?.id || null,value.focusType || null), dailyDay:mode==='daily'?value.dailyDay:null,index, answered, hint, finalized, answers};
 }

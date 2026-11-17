@@ -146,3 +146,10 @@ git push -u origin main
 ```
 
 This is an unofficial fan learning tool. Pokémon images, names, and associated trademarks belong to their respective owners. Pokémon sprites are sourced from PokéAPI; the pixel-art scenery and interface decorations were created for this project. See [sprite attribution](assets/ATTRIBUTION.md) for details.
+
+
+### Daily Gym and evolving buddies
+
+The Overview and arena offer a five-question Daily Gym, identical for everyone in the same chart era and UTC date. Four single-type questions cover 0×, ½×, 1× and 2×; one question uses two defending types. The versioned seeded shuffle does not use personal progress. There are no hints. Only the first completed score for each era/date is kept; replays still give normal practice feedback. Copy daily score shares text and the public site URL, without uploading progress. An unfinished quiz keeps its original UTC date through midnight and reloads.
+
+Bulbasaur, Charmander and Squirtle evolve after two completed lessons, then after five lessons plus ten mastered matchups (including delayed recall). These are learning rewards, not game evolution requirements. Evolution rewards are shared by the starter choices within each era, and stay earned even after mistakes or a lessons-only restart. An entire-era reset clears rewards and daily scores; undo restores them. Existing progress qualifies automatically. Pikachu and Eevee remain available as unevolving companions. Evolution art is served locally in animated and still forms.
