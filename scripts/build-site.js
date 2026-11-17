@@ -12,7 +12,7 @@ if(path.relative(root,output)!=='_site')throw new Error('Build output must stay 
 console.log(`Building static site in ${output}`);
 await rm(output,{recursive:true,force:true});
 await mkdir(output,{recursive:true});
-for(const entry of ['index.html','privacy.html','about.html','favicon.svg','src','assets']){
+for(const entry of ['index.html','privacy.html','about.html','favicon.svg','src','assets','guides']){
   await cp(path.join(root,entry),path.join(output,entry),{recursive:true});
 }
 const tag=verificationTag(AD_CONFIG);
@@ -22,4 +22,6 @@ if(tag){
   await writeFile(entry,(await readFile(entry,'utf8')).replace('</head>',`  ${tag}\n</head>`));
 }
 await writeFile(path.join(output,'.nojekyll'),'');
+const pages=['','about.html','privacy.html','guides/index.html','guides/type-effectiveness.html','guides/type-immunities.html','guides/dual-types.html','guides/generation-differences.html'];
+await writeFile(path.join(output,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+pages.map(p=>'<url><loc>https://jdakmon.github.io/type-dojo/'+p+'</loc></url>').join('')+'</urlset>');
 console.log('GitHub Pages artifact ready.');

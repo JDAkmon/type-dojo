@@ -17,3 +17,6 @@ await writeFile(path.join(output,'index.html'),html.replace('<!-- ADSENSE_VERIFI
 await writeFile(path.join(output,'ads.txt'),adsTxt(AD_CONFIG));
 await writeFile(path.join(output,'.nojekyll'),'');
 console.log('Publish these files at https://jdakmon.github.io/ (not under /type-dojo/).');
+
+await writeFile(path.join(output,'robots.txt'),'User-agent: *\nAllow: /\nSitemap: https://jdakmon.github.io/sitemap.xml\nSitemap: https://jdakmon.github.io/type-dojo/sitemap.xml\n');
+await writeFile(path.join(output,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://jdakmon.github.io/</loc></url></urlset>');

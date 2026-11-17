@@ -27,8 +27,8 @@ const base=`http://127.0.0.1:${server.address().port}/type-dojo/`;
 let browser,passed=0;
 const launchOptions={headless:true};
 if(process.env.PLAYWRIGHT_EXECUTABLE_PATH)launchOptions.executablePath=process.env.PLAYWRIGHT_EXECUTABLE_PATH;
-async function run(name,fn){
-  const context=await browser.newContext({viewport:{width:1365,height:900},reducedMotion:'reduce'});
+async function run(name,fn,options={}){
+  const context=await browser.newContext({viewport:{width:1365,height:900},reducedMotion:'reduce',...options});
   const errors=[];
   context.on('page',page=>{
     page.on('pageerror',e=>errors.push(e.message));
@@ -49,6 +49,20 @@ async function correctAnswer(page,era='6'){
 }
 try{
   browser=await chromium.launch(launchOptions);
+  await run('Learning guides and app introduction are readable without JavaScript',async(page,context)=>{
+    const pages=['','guides/index.html','guides/type-effectiveness.html','guides/type-immunities.html','guides/dual-types.html','guides/generation-differences.html'];
+    for(const route of pages){
+      await page.goto(base+route);assert.equal(await page.locator('h1').count(),1);
+      assert.ok((await page.locator('main').textContent()).length>500);
+      for(const width of [320,390,1365]){await page.setViewportSize({width,height:844});assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),route+' overflow');}
+      if(route.includes('guides/')&&!route.endsWith('index.html')){await page.locator('summary').click();assert.equal(await page.locator('details[open]').count(),1);assert.match(await page.locator('link[rel="canonical"]').getAttribute('href'),/https:\/\/jdakmon.github.io\/type-dojo\/guides\//);}
+      const links=await page.locator('main a').evaluateAll(as=>as.map(a=>a.href));
+      for(const url of new Set(links.filter(u=>u.startsWith(base))))assert.ok((await context.request.get(url.split('#')[0])).ok(),url);
+    }
+    const sitemap=await (await context.request.get(base+'sitemap.xml')).text();assert.match(sitemap,/guides\/generation-differences.html/);
+    if(process.env.AUDIT_SCREENSHOTS){await page.goto(base+'guides/dual-types.html');await page.setViewportSize({width:390,height:844});await page.screenshot({path:path.join(process.env.AUDIT_SCREENSHOTS,'learning-guide-mobile.png'),fullPage:true});}
+  },{javaScriptEnabled:false});
+
   await run('Daily gym preserves first score, resumes and copies a share score',async page=>{
     await page.goto(base);await page.locator('[data-mode="daily"]').click();
     assert.equal(await page.locator('[data-action="hint"]').count(),0);
