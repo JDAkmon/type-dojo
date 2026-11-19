@@ -78,9 +78,11 @@ try{
     await otherTab.locator('[data-action="restart-journey"]').click();
     await otherTab.locator('input[name="reset-scope"][value="era"]').check();
     await otherTab.getByRole('button',{name:'Restart selected progress'}).click();
-    await page.reload();
-    await page.getByText('No saved daily score for this date.',{exact:false}).waitFor();
+    const clearedScore = page.getByText('No saved daily score for this date.',{exact:false});
+    await clearedScore.waitFor();
     assert.equal(await page.locator('[data-action="share-daily"]').count(),0);
+    await page.reload();
+    await clearedScore.waitFor();
   });
   await run('Starter evolution renders all stages with local still sprites',async page=>{
     await page.goto(base);

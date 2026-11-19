@@ -274,9 +274,14 @@ window.addEventListener('storage',e=>{
   if(e.key===STORAGE_KEY&&e.newValue){
     try{
       const incoming=validateState(JSON.parse(e.newValue)),era=state.era;
+      const dailyDay = session?.mode === 'daily' && session.index === session.questions.length ? session.dailyDay : null;
+      const previousScore = dailyDay ? bucket().daily?.[dailyDay] : undefined;
       state=incoming;state.era=era;
       // A tab owns its quiz and selected era; only learning history is shared.
       if(!session){render();toast('Progress updated in another tab.');}
+      else if (dailyDay && previousScore !== bucket().daily?.[dailyDay]) {
+        render('.result-panel h2');
+      }
     }catch{toast('Another tab saved unreadable progress. Your current session is still available.');}
   }
   if(e.key==='type-dojo-reset-backup-v1'){
