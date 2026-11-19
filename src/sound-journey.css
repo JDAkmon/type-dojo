@@ -27,3 +27,19 @@
 .reset-options small{display:block;line-height:1.6;font-size:11px;color:#83916e;margin-top:5px}
 @media(max-width:800px){.sound-toggle>span{display:none}.topbar-right{gap:7px}.topbar select{min-width:0}.sound-toggle{padding:8px}.sound-settings-button{width:21px}}
 @media(max-width:600px){.topbar-right{width:100%;gap:6px}.topbar select{flex:1;max-width:none;padding-right:5px}.topbar .mini-avatar{display:none}.sound-toggle{padding:7px}.sound-settings-button{width:20px;height:31px}.sound-toggle .icon{width:15px;height:15px}.journey-controls{justify-content:center}.journey-controls .text-button{font-size:11px}.journey-controls>span{text-align:center}}
+
+.save-menu-button {
+  flex-shrink: 0;
+  min-height: 33px;
+  padding: 0 10px;
+  border: 1px solid #d9d8c4;
+  border-radius: 8px;
+  background: #fffaf0;
+  color: #465b42;
+  font-size: 12px;
+  font-weight: 650;
+}
+.save-menu-button:hover { background: #edf3e2; }
+@media (max-width: 420px) {
+  .topbar .breadcrumb { display: none; }
+}

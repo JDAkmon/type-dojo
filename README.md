@@ -12,7 +12,7 @@ Pushes to `main` run the game and deployment checks, build the static `_site` fo
 
 Run `npm test` and `npm run build` to verify the release locally. For browser regressions, run `npm ci`, `npx playwright install chromium`, then `npm run test:browser` after building. CI runs these checks before publishing. You can set `PLAYWRIGHT_EXECUTABLE_PATH` to an installed Chrome binary for local testing. `_site` contains only the site entry point, favicon, app source, public assets, and `.nojekyll`; generated output is ignored by Git. Asset URLs support both a local domain root and the `/type-dojo/` project path.
 
-Progress stays in each browser's local storage. Your localhost save and the hosted site's save are separate: use **My progress → Export backup** on localhost, then **Import backup** on the hosted site to carry your journey over. Import the file using the site's existing restore confirmation.
+Progress stays in each browser's local storage. Your localhost save and the hosted site's save are separate: use **Save → Export backup** on localhost, then **Save → Import backup** on the hosted site to carry your journey over. Confirm the restore to replace progress across all three game eras.
 
 ## Run locally
 

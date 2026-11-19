@@ -112,6 +112,68 @@ try{
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
     if(process.env.AUDIT_SCREENSHOTS){await mkdir(process.env.AUDIT_SCREENSHOTS,{recursive:true});await page.screenshot({path:path.join(process.env.AUDIT_SCREENSHOTS,'mobile-library-fixed.png'),fullPage:true});}
   });
+  await run('Top bar Save exports and safely restores progress during a quiz',async page=>{
+    await page.setViewportSize({width:320,height:844});
+    await page.goto(base);
+    await page.locator('[data-mode="attack"]').click();
+    await correctAnswer(page);
+    const originalProgress = await saved(page);
+    const originalSession = await session(page);
+    const saveButton = page.getByRole('button',{name:'Save',exact:true});
+    const bounds = await saveButton.boundingBox();
+    assert.ok(bounds && bounds.x >= 0 && bounds.x + bounds.width <= 320);
+
+    await saveButton.focus();
+    await page.keyboard.press('Enter');
+    const saveMenu = page.getByRole('dialog',{name:'Save progress'});
+    const downloadPromise = page.waitForEvent('download');
+    await saveMenu.getByRole('button',{name:'Export backup'}).click();
+    const download = await downloadPromise;
+    assert.equal(download.suggestedFilename(),'type-dojo-progress.json');
+    assert.deepEqual(JSON.parse(await readFile(await download.path(),'utf8')),originalProgress);
+    assert.deepEqual(await session(page),originalSession);
+
+    const backup = freshState();
+    backup.era = '1';
+    backup.eras['1'].xp = 125;
+    backup.eras['2'].xp = 210;
+    const restoreDialog = page.getByRole('dialog',{name:'Restore this progress backup?'});
+    async function selectBackup() {
+      await saveButton.click();
+      const chooserPromise = page.waitForEvent('filechooser');
+      await saveMenu.getByRole('button',{name:'Import backup'}).click();
+      const chooser = await chooserPromise;
+      await chooser.setFiles({name:'type-dojo-progress.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup))});
+      await restoreDialog.waitFor();
+    }
+    await selectBackup();
+    assert.match(await restoreDialog.textContent(),/ends the current practice session/);
+    await restoreDialog.getByRole('button',{name:'Cancel'}).click();
+    assert.deepEqual(await session(page),originalSession);
+    assert.deepEqual(await saved(page),originalProgress);
+
+    await selectBackup();
+    await page.evaluate(key=>{
+      const setItem = Storage.prototype.setItem;
+      Storage.prototype.setItem = function(k,value) {
+        if(k===key) throw new DOMException('Test quota limit','QuotaExceededError');
+        return setItem.call(this,k,value);
+      };
+      window.allowSave = ()=>{Storage.prototype.setItem = setItem;};
+    },STORAGE_KEY);
+    await restoreDialog.getByRole('button',{name:'Restore backup'}).click();
+    await page.getByText('This browser could not save the imported backup.',{exact:false}).waitFor();
+    assert.deepEqual(await session(page),originalSession);
+    assert.deepEqual(await saved(page),originalProgress);
+    await page.evaluate(()=>window.allowSave());
+
+    await selectBackup();
+    await restoreDialog.getByRole('button',{name:'Restore backup'}).click();
+    await page.getByRole('heading',{name:'The practice arena'}).waitFor();
+    assert.equal(await page.locator('#era').inputValue(),'1');
+    assert.deepEqual(await saved(page),backup);
+    assert.equal(await session(page),null);
+  });
   await run('Unreadable progress is archived and can be downloaded before replacement',async page=>{
     const state=freshState();state.eras['6'].xp=1000;state.eras['6'].days=['invalid-day'];
     const raw=JSON.stringify(state);
