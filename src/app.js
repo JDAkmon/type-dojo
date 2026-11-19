@@ -1,6 +1,6 @@
-import {dayKey,dailyQuestions,dailyShare,evolutionStage,evolvedBuddy,EVOLUTIONS} from './journey.js';
+import {dayKey,dailyShare,evolutionStage,evolvedBuddy,EVOLUTIONS} from './journey.js';
 import {loadProgress,saveProgress,recoveryFiles} from './storage.js';
-import {SESSION_KEY,makeSession,restoreSession,finalizeSession} from './session.js';
+import {SESSION_KEY,makeSession,makeDailySession,restoreSession,finalizeSession} from './session.js';
 import { typeText } from './type-text.js';
 import { mountAdPlacement } from './ads.js';
 import { buildMoveSession,recordMoveChoice,mistakeExplanation } from './battles.js';
@@ -42,7 +42,12 @@ function recoveryNotice(){
   let copies=[];try{copies=recoveryFiles(localStorage);}catch{}
   return copies.length||unreadableRaw?'<div class="notice recovery-notice" role="status">A saved progress file could not be read. Your original data has been kept for recovery. <button class="text-button" data-action="recover-save">Download original save</button></div>':'';
 }
-let view=['home','learn','practice','library','chart','progress'].includes(location.hash.slice(1))?location.hash.slice(1):'home';
+const routes = ['home','learn','practice','library','chart','progress'];
+function routeForHash(hash) {
+  const route = hash.slice(1) || 'home';
+  return routes.includes(route) ? route : null;
+}
+let view = routeForHash(location.hash) ?? 'home';
 let resetBackup=null;
 try{const raw=localStorage.getItem('type-dojo-reset-backup-v1');if(raw)resetBackup=validateResetBackup(JSON.parse(raw));}catch{}
 let session=null,lessonId=null,libraryType='Water',librarySearch='',libraryFilter='all';
@@ -93,7 +98,31 @@ function challengeResult(passed){
 function learn(){if(lessonId==='graduation')return graduationView();if(lessonId){const l=LESSONS.find(l=>l.id===lessonId);return `${heading('GROUND ZERO · GUIDED LESSON',l.title,l.description,`<button class="secondary" data-action="lessons">${icon('book')} All lessons</button>`)}<section class="lesson-panel">${typeCast(l.types,'lesson-cast')}<h2>A little understanding goes a long way.</h2><p class="lesson-text">${typeText(l.text)}</p><div class="damage-guide">${[2,1,.5,0].map(n=>`<div class="damage-cell effect-${n===.5?'half':n}"><b>${multiplier(n)}</b><span>${LABELS[n]}</span></div>`).join('')}</div><div class="notice">${typeText(ERAS[state.era].description)}</div><button class="primary" data-action="lesson-start">Try what you learned ${icon('arrow')}</button><p class="small muted">${lessonQuestions(l,state.era).length} questions · 75% correct without hints completes this lesson · Retake anytime</p></section>`;}
 return `${heading('YOUR FIRST STEP TO CONFIDENT BATTLES','Ground Zero','Start with the basics. Add a few types at a time. You don’t need to know anything yet.')}<div class="notice">${icon('info')} Using ${ERAS[state.era].name}: ${typeText(ERAS[state.era].description)}</div><div class="lesson-grid">${LESSONS.map((l,i)=>{const available=lessonQuestions(l,state.era).length>0,complete=bucket().lessons.includes(l.id);return `<button class="lesson-card ${complete?'completed':''}" data-lesson="${l.id}" ${available?'':'disabled'}><div class="card-top"><span class="lesson-number">${complete?icon('check'):String(i+1).padStart(2,'0')}</span><span class="pill">${complete?'COMPLETE':!available?'NOT IN THIS ERA':l.tag}</span></div>${typeCast(l.types.slice(0,3),'lesson-card-cast')}<h3>${l.title}</h3><p>${typeText(l.description)}</p><div class="card-bottom"><span>${available?lessonQuestions(l,state.era).length+' guided questions':'Switch to Gen II–V or Gen VI+'}</span>${icon('arrow')}</div></button>`;}).join('')}</div>`;}
 function practice(){if(session)return sessionView(); const s=stats(bucket(),state.era);return `${heading('A LITTLE PRACTICE. A LOT OF CONFIDENCE.','The practice arena','Choose your focus. Every answer comes with an explanation, and every mistake helps shape your next practice.')}<div class="practice-banner">${sprite(6,'banner-pokemon','')}<div><h3>Your next battle is with yourself.</h3><p>No timers. No lost lives. Just one better instinct at a time.</p></div><span class="pill">${ERAS[state.era].short} RULES</span></div>${dailyCard()}<div class="mode-grid">${modeCard('moves','bolt','Pick the move','Choose a verified move with the best type advantage.','8 BATTLES')}${modeCard('attack','swords','Attack matchups','You use a move. Predict the damage.','10 QUESTIONS')}${modeCard('defense','shield','Defend your Pokémon','Recognize incoming weaknesses and resistances.','10 QUESTIONS')}${modeCard('immunity','ghost','Immunity detective','Spot the attacks that fail—and the lookalikes that land.','MIXED MATCHUPS')}${modeCard('dual','grid','Double-type thinking','Multiply two types: 4×, ¼×, and everything between.','LEVEL UP')}${modeCard('review','clock','Your personal review','Revisit missed answers and matchups due for review.',`${s.due} READY`)}${modeCard('challenge','trophy','Type hero challenge','20 mixed questions. No hints. Earn your badge with 16 correct.','FINAL BOSS')}</div><div class="notice">${icon('info')} Practice covers all ${s.total} single-type matchups, including neutral results. New and missed matchups receive extra attention. Mastery needs three unaided correct answers and a recall after at least 12 hours.</div>`;}
-function startSession(mode,lesson=null,custom=null,focusType=null){syncProgress();let questions=custom|| (lesson?lessonQuestions(lesson,state.era):mode==='daily'?dailyQuestions(state.era,dayKey()):mode==='moves'?buildMoveSession(state.era,bucket()):mode==='focus'?buildStudySession(state.era,bucket()):mode==='challenge'?[...buildSession('attack',state.era,bucket(),14),...buildSession('dual',state.era,bucket(),6)]:buildSession(mode,state.era,bucket())); if(!questions.length){toast(mode==='review'?'Nothing is due yet. Try matchup practice to build your review queue.':'This lesson is not available in this era.');return;}sounds.play('start');session=makeSession(mode,state.era,questions,lesson?.id||null,focusType);view='practice';location.hash='practice';render('.battle-panel h1');window.scrollTo(0,0);}
+function startSession(mode,lesson=null,custom=null,focusType=null) {
+  syncProgress();
+  const era = state.era;
+  let nextSession;
+  if (mode === 'daily') {
+    nextSession = makeDailySession(era);
+  } else {
+    let questions = custom;
+    if (lesson) questions = lessonQuestions(lesson,era);
+    else if (mode === 'moves') questions = buildMoveSession(era,bucket());
+    else if (mode === 'focus') questions = buildStudySession(era,bucket());
+    else if (mode === 'challenge') questions = [...buildSession('attack',era,bucket(),14),...buildSession('dual',era,bucket(),6)];
+    nextSession = makeSession(mode,era,questions ?? buildSession(mode,era,bucket()),lesson?.id ?? null,focusType);
+  }
+  if (!nextSession.questions.length) {
+    toast(mode==='review'?'Nothing is due yet. Try matchup practice to build your review queue.':'This lesson is not available in this era.');
+    return;
+  }
+  sounds.play('start');
+  session = nextSession;
+  view = 'practice';
+  location.hash = view;
+  render('.battle-panel h1');
+  window.scrollTo(0,0);
+}
 function sessionView(){const x=session,finished=x.index>=x.questions.length;if(finished){const correct=x.answers.filter(a=>a.correct).length,unaided=x.answers.filter(a=>a.correct&&!a.assisted).length,passed=x.mode==='challenge'?unaided>=CHALLENGE_PASS:unaided/x.questions.length>=.75,l=x.lesson&&LESSONS.find(l=>l.id===x.lesson);return `${heading('ONE STEP STRONGER','Nice work, trainer.','Every answer is another connection made. Keep the useful ones close.')}<section class="result-panel"><div class="result-pokemon">${sprite(passed?149:buddy(),'','')}<span>${icon(passed?'trophy':'heart')}</span></div><h2>${x.mode==='challenge'?(passed?'Type Hero badge earned!':'Your next badge is within reach.'):(passed?'Your instincts are growing.':'Progress starts with showing up.')}</h2><p><b>${correct} / ${x.questions.length}</b> ${x.mode==='moves'?'best move choices':'correct · '+unaided+' without hints'}</p>${x.mode==='challenge'?challengeResult(passed):x.mode==='daily'?dailyResult(x.dailyDay):''}${l?`<div class="notice">${passed?'Lesson complete!':'This lesson needs 75% correct without hints. You can review the lesson and try again.'}</div>`:''}<div class="result-actions"><button class="primary" data-action="again">Practice again ${icon('arrow')}</button><button class="secondary" data-nav="progress">See my progress</button>${l?(courseStatus(bucket(),state.era).graduated?'<button class="secondary" data-action="graduation">Celebrate & take the challenge</button>':'<button class="secondary" data-action="next-lesson">Next lesson</button>'):''}<button class="secondary" data-mode="focus">Practice my tricky types</button></div><div class="answer-review">${x.questions.map((q,i)=>`<div class="review-row"><span class="answer-dot ${x.answers[i].correct?'good':'bad'}">${icon(x.answers[i].correct?'check':'close')}</span><span>${x.mode==='moves'?esc(q.moves[x.answers[i].moveIndex].move)+' · '+badge(q.moves[x.answers[i].moveIndex].type):badge(q.a)} ${icon('arrow')} ${q.ds.map(t=>badge(t)).join(' ')}</span><b>${multiplier(x.mode==='moves'?q.moves[x.answers[i].moveIndex].value:q.value)}</b><small>${x.mode==='moves'&&!x.answers[i].correct?'Best: '+q.moves.filter(m=>m.value===q.value).map(m=>m.move).join(' / ')+' ('+multiplier(q.value)+')':x.answers[i].assisted?'Hint used':x.answers[i].correct?'Got it':'Keep practicing'}</small></div>`).join('')}</div></section>`;}
 if(x.mode==='moves')return moveBattleView();
 const q=x.questions[x.index],move=moveExample(q.a,state.era),answer=x.answers[x.index],options=q.ds.length===2?[0,.25,.5,1,2,4]:[0,.5,1,2];return `<div class="session-header"><button class="text-button" data-action="exit">${icon('close')} Leave session</button><span class="pill">${x.lesson?'GROUND ZERO':x.mode==='daily'?'DAILY GYM · '+x.dailyDay+' UTC':x.mode==='challenge'?'TYPE HERO CHALLENGE':x.mode==='focus'?'YOUR STUDY PLAN':x.mode==='immunity'?'IMMUNITY DETECTIVE':x.mode.toUpperCase()+' PRACTICE'} · ${ERAS[state.era].short}</span><b>${x.index+1} <span class="muted">/ ${x.questions.length}</span></b></div><div class="progress-track session-track"><span style="width:${x.index/x.questions.length*100}%"></span></div><section class="battle-panel"><div class="eyebrow">${x.mode==='defense'?'SPOT THE INCOMING DAMAGE':x.mode==='immunity'?'IMMUNE OR JUST A LOOKALIKE?':'CALL THE MATCHUP'}</div><h1>${x.mode==='defense'?'How much damage does your Pokémon take?':'How effective is this attack?'}</h1><p>${move?`<strong>${esc(move.pokemonName)} used ${esc(move.move)}!</strong> `:''}A ${typeText(q.a)}-type ${move?'attack':'chart example'} hits a ${typeText(q.ds.join(' / '))}-type ${x.mode==='defense'?'Pokémon on your team':'target'}.</p><div class="battle-scene ${x.answered?(answer.correct?'battle-success':'battle-miss'):''}"><span class="battle-scene-label">TYPE DOJO · TRAINING BATTLE</span><div class="battle-types"><div><span class="small eyebrow">ATTACKING POKÉMON</span>${battleActor([q.a],true)}<b class="battle-move-name">${move?esc(move.move):'Dragon chart practice'}</b>${badge(q.a,true)}</div><span class="battle-arrow">${icon('arrow')}<small>ATTACK</small></span><div><span class="small eyebrow">${x.mode==='defense'?'YOUR POKÉMON':'DEFENDING TARGET'}</span>${battleActor(q.ds)}<span class="battle-move-name battle-target-label">Defending types</span><div>${q.ds.map(t=>badge(t,true)).join(' ')}</div></div></div>${x.answered?`<span class="battle-result-stamp">${answer.correct?'Nice call!':'New matchup unlocked'}</span>`:''}</div>${moveInfo(move)}${mistakeReminder(q)}<div class="answer-options ${options.length===6?'six':''}">${options.map((n,i)=>`<button data-answer="${n}" data-effect="${n}" class="answer-option ${x.answered&&n===q.value?'correct':x.answered&&n===answer.value&&!answer.correct?'incorrect':''}" ${x.answered?'disabled':''}><span class="key">${i+1}</span><b>${multiplier(n)}</b><span>${LABELS[n]}</span></button>`).join('')}</div>${x.answered?`<div class="feedback ${answer.correct?'good':'bad'}" role="status"><b>${answer.correct?'You’ve got it!':'A useful one to remember.'} ${multiplier(q.value)} · ${LABELS[q.value]}</b><p>${!answer.correct?typeText(mistakeExplanation(q,answer.value,state.era)):q.ds.map(d=>typeText(mnemonic(q.a,d,state.era))).join(' ')}</p>${q.ds.length===2?`<div class="calculation">${q.ds.map(d=>`${typeText(q.a)} → ${typeText(d)}: ${multiplier(effectiveness(q.a,d,state.era))}`).join(' &nbsp; × &nbsp; ')} = <b>${multiplier(q.value)}</b></div>`:''}${answer.assisted?'<small>Hint used: this answer adds practice XP, but does not build a mastery streak.</small>':''}</div><button class="primary" data-action="next">${x.index+1===x.questions.length?'See your results':'Next matchup'} ${icon('arrow')}</button>`:x.hint?`<div class="hint-box">${icon('spark')}<p>${q.ds.map(d=>typeText(mnemonic(q.a,d,state.era))).join(' ')}</p></div>`:`${!['challenge','daily'].includes(x.mode)?'<button class="text-button hint-button" data-action="hint">'+icon('spark')+' Give me a memory hook</button>':''}<p class="small muted key-help">Use the number keys to answer. Enter advances after feedback.</p>`}</section>`;}
@@ -160,7 +189,22 @@ function undoReset(){
   dialog('Restore your journey?',`<p>This restores ${backup.scope==='lessons'?'your completed Ground Zero chapters':'the progress from before your latest reset'} for <b>${ERAS[backup.era].name}</b>.</p><p>${backup.scope==='lessons'?'Practice answers and XP earned since the reset are kept.':'Any new progress in this era since the reset will be replaced by the saved copy.'}</p>`,[{label:'Keep current progress',value:false},{label:'Restore progress',value:true}],ok=>{if(ok){syncProgress();restoreProgress(state,backup);state.era=backup.era;rememberReset(null);session=null;lessonId=null;save();view='home';location.hash='home';render();toast('Your journey has been restored.');}});
 }
 
-function navigate(next){const go=()=>{if(next!==view||(next==='practice'&&session?.finalized)){session=null;lessonId=null;}view=next;location.hash=next;render('#main');window.scrollTo(0,0);};if(session&&session.index<session.questions.length&&next!==view){if(location.hash.slice(1)!==view)location.hash=view;dialog('Leave this practice session?','<p>Your answered questions are already saved. The remaining questions will be set aside.</p>',[{label:'Keep practicing',value:false},{label:'Leave session',value:true}],ok=>{if(ok)go();});}else go();}
+function navigate(next, targetHash = `#${next}`) {
+  const go = () => {
+    if (next !== view || (next === 'practice' && session?.finalized)) {
+      session = null;
+      lessonId = null;
+    }
+    view = next;
+    if (location.hash !== targetHash) location.hash = targetHash;
+    render('#main');
+    window.scrollTo(0,0);
+  };
+  if (session && !session.finalized && next !== view) {
+    if (location.hash !== `#${view}`) location.hash = view;
+    dialog('Leave this practice session?','<p>Your answered questions are already saved. The remaining questions will be set aside.</p>',[{label:'Keep practicing',value:false},{label:'Leave session',value:true}],ok=>{if(ok)go();});
+  } else go();
+}
 function showPair(key){const [a,def]=key.split('>'),ds=def.split('+'),value=dualEffectiveness(a,ds,state.era);dialog(`${a} → ${ds.join(' / ')}`,`<div class="modal-matchup">${badge(a,true)}${icon('arrow')}${ds.map(d=>badge(d,true)).join(' ')}</div><div class="modal-damage">${multiplier(value)} <span>${LABELS[value]}</span></div><p>${ds.map(d=>typeText(mnemonic(a,d,state.era))).join(' ')}</p><p class="small muted">${ERAS[state.era].name}. This is an attacking move hitting a defending type.</p>`);}
 document.addEventListener('click',e=>{const chosen=e.target.closest('[data-buddy]');if(chosen){settings.buddy=Number(chosen.dataset.buddy);saveSettings();sounds.play('buddy');render();toast(`${buddy().name} joined your study team!`);return;}const nav=e.target.closest('[data-nav]');if(nav){e.preventDefault();navigate(nav.dataset.nav);return;}const mode=e.target.closest('[data-mode]');if(mode){startSession(mode.dataset.mode);return;}const lesson=e.target.closest('[data-lesson]');if(lesson){lessonId=lesson.dataset.lesson;view='learn';render();window.scrollTo(0,0);return;}const type=e.target.closest('[data-type]');if(type){libraryType=type.dataset.type;document.querySelector('#type-list').innerHTML=typeList();document.querySelector('#type-detail').innerHTML=typeDetail();document.querySelector(`[data-type="${libraryType}"]`).focus({preventScroll:true});return;}const pair=e.target.closest('[data-pair]');if(pair){showPair(pair.dataset.pair);return;}const moveChoice=e.target.closest('[data-move]');if(moveChoice){submitMove(Number(moveChoice.dataset.move));return;}const answer=e.target.closest('[data-answer]');if(answer){submit(Number(answer.dataset.answer));return;}const action=e.target.closest('[data-action]')?.dataset.action;if(!action)return;
 if(action==='sound-toggle'){settings.sound=!soundOn();if(settings.sound&&settings.volume===0)settings.volume=25;sounds.configure({enabled:settings.sound,volume:settings.volume,battleEffects:settings.battleEffects});saveSettings();refreshSoundControl();if(settings.sound)sounds.play('tap');}
@@ -196,8 +240,34 @@ if(e.target.id.startsWith('calc-'))calc();
 if(e.target.id==='progress-filter'){libraryFilter=e.target.value;render();}
 if(e.target.id==='backup-input'){const file=e.target.files[0];if(!file)return;try{if(file.size>2000000)throw new Error('Backup is too large.');const imported=validateState(JSON.parse(await file.text()));dialog('Restore this progress backup?','<p>This replaces the progress in all three eras with the backup’s history. Export your current progress first if you want to keep it.</p>',[{label:'Cancel',value:false},{label:'Restore backup',value:true}],ok=>{if(ok){state=imported;session=null;lessonId=null;save();render();toast('Your progress has been restored.');}});}catch(err){toast('Could not import: '+err.message);}e.target.value='';}
 });
-document.addEventListener('keydown',e=>{if(document.querySelector('dialog')||['INPUT','SELECT','TEXTAREA'].includes(document.activeElement?.tagName))return;if(session&&view==='practice'&&session.index<session.questions.length){if(e.key==='Enter'&&session.answered&&document.activeElement?.tagName!=='BUTTON'){document.querySelector('[data-action="next"]').click();e.preventDefault();}else if(!session.answered&&/^[1-6]$/.test(e.key)){if(session.mode==='moves'){submitMove(Number(e.key)-1);return;}const options=session.questions[session.index].ds.length===2?[0,.25,.5,1,2,4]:[0,.5,1,2],n=options[Number(e.key)-1];if(n!==undefined)submit(n);}}});
-window.addEventListener('hashchange',()=>{const next=location.hash.slice(1);if(['home','learn','practice','library','chart','progress'].includes(next)&&next!==view)navigate(next);});
+document.querySelector('.skip').addEventListener('click',event=>{
+  event.preventDefault();
+  const main = document.getElementById('main');
+  main.focus({preventScroll:true});
+  main.scrollIntoView();
+});
+document.addEventListener('keydown',event=>{
+  if (!session || view !== 'practice' || session.index >= session.questions.length) return;
+  if (document.querySelector('dialog') || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+  const target = document.activeElement;
+  if (target?.closest('input,select,textarea,[contenteditable="true"]')) return;
+  if (event.key === 'Enter' && session.answered) {
+    if (target?.closest('a,button,summary,[role="button"],[role="link"]')) return;
+    document.querySelector('[data-action="next"]').click();
+    event.preventDefault();
+  } else if (!session.answered && /^[1-6]$/.test(event.key)) {
+    const index = Number(event.key)-1;
+    if (session.mode === 'moves') submitMove(index);
+    else {
+      const options = session.questions[session.index].ds.length===2 ? [0,.25,.5,1,2,4] : [0,.5,1,2];
+      if (options[index] !== undefined) submit(options[index]);
+    }
+  }
+});
+window.addEventListener('hashchange',()=>{
+  const next = routeForHash(location.hash);
+  if (next && next !== view) navigate(next, location.hash);
+});
 document.addEventListener('visibilitychange',()=>{if(document.hidden)sounds.stop();else updateAdPlacement(view);});
 window.addEventListener('pagehide',()=>sounds.stop());
 window.addEventListener('storage',e=>{
@@ -222,5 +292,9 @@ function evolutionCard(){
  return `<div class="evolution-card"><b>${buddy().name} · ${stage===2?'Fully evolved!':'Growing with you'}</b><div class="evolution-line">${line.map(([id,name],i)=>`<span class="${i>stage?'evolution-locked':''}">${sprite({id,name},'',name)}<small>${name}${i>stage?' · Locked':''}</small></span>`).join('')}</div><p>${stage===0?`${Math.min(2,bucket().lessons.length)} / 2 lessons complete to evolve.`:stage===1?`${Math.min(5,bucket().lessons.length)} / 5 lessons and ${Math.min(10,recall)} / 10 mastered matchups to evolve again.`:'Your learning has unlocked the whole evolution line.'}</p><small>Mastery includes recall after 12 hours. Rewards belong to this era and stay earned until an era reset. These are study milestones, not in-game evolution rules.</small></div>`;
 }
 function dailyCard(){const day=dayKey(),score=bucket().daily?.[day];return `<section class="daily-gym"><div class="daily-emblem">${sprite(149,'','')}${icon('trophy')}</div><div><span class="eyebrow">DAILY GYM · ${day} UTC</span><h2>Five matchups. One daily challenge.</h2><p>Face Dragonite’s mixed-type test: advantages, resistances, immunity, neutral damage, and a dual type. Same questions for everyone using ${ERAS[state.era].short}.</p><small>${score===undefined?'No hints. Your first completed score is saved.':`First completed score: ${score} / 5. Replays are practice.`} New challenge at midnight UTC. No streak to lose.</small></div><button class="primary" data-mode="daily">${score===undefined?'Enter the daily gym':'Replay today’s gym'} ${icon('arrow')}</button></section>`;}
-function dailyResult(day){return `<div class="notice"><p>Daily Gym · ${day} UTC · First completed score: <b>${bucket().daily?.[day]??0} / 5</b>. Replays keep that score. Saved on this device.</p><button class="secondary" data-action="share-daily">Copy daily score</button></div>`;}
+function dailyResult(day){
+  const score = bucket().daily?.[day];
+  if (score === undefined) return `<div class="notice">Daily Gym · ${day} UTC · No saved daily score for this date.</div>`;
+  return `<div class="notice"><p>Daily Gym · ${day} UTC · First completed score: <b>${score} / 5</b>. Replays keep that score. Saved on this device.</p><button class="secondary" data-action="share-daily">Copy daily score</button></div>`;
+}
 async function shareDaily(day){const score=bucket().daily?.[day];if(score===undefined)return;const text=dailyShare(day,state.era,score);try{await navigator.clipboard.writeText(text);toast('Daily score copied!');}catch{dialog('Share your daily score',`<p>Copy this score to share with friends.</p><textarea readonly rows="5" aria-label="Daily score">${esc(text)}</textarea>`);}}

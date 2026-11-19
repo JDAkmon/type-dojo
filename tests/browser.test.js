@@ -63,7 +63,7 @@ try{
     if(process.env.AUDIT_SCREENSHOTS){await page.goto(base+'guides/dual-types.html');await page.setViewportSize({width:390,height:844});await page.screenshot({path:path.join(process.env.AUDIT_SCREENSHOTS,'learning-guide-mobile.png'),fullPage:true});}
   },{javaScriptEnabled:false});
 
-  await run('Daily gym preserves first score, resumes and copies a share score',async page=>{
+  await run('Daily gym resumes, preserves and shares the first score until reset',async (page,context)=>{
     await page.goto(base);await page.locator('[data-mode="daily"]').click();
     assert.equal(await page.locator('[data-action="hint"]').count(),0);
     for(let i=0;i<5;i++){await correctAnswer(page);if(i===2){await page.reload();assert.equal((await session(page)).answers.length,3);}await page.locator('[data-action="next"]').click();}
@@ -73,6 +73,14 @@ try{
     await page.locator('[data-action="again"]').click();
     for(let i=0;i<5;i++){const q=(await session(page)).questions[i];await page.locator(`[data-answer="${q.value===0?1:0}"]`).click();await page.locator('[data-action="next"]').click();}
     assert.equal((await saved(page)).eras['6'].daily[day],5);
+    const otherTab = await context.newPage();
+    await otherTab.goto(base);
+    await otherTab.locator('[data-action="restart-journey"]').click();
+    await otherTab.locator('input[name="reset-scope"][value="era"]').check();
+    await otherTab.getByRole('button',{name:'Restart selected progress'}).click();
+    await page.reload();
+    await page.getByText('No saved daily score for this date.',{exact:false}).waitFor();
+    assert.equal(await page.locator('[data-action="share-daily"]').count(),0);
   });
   await run('Starter evolution renders all stages with local still sprites',async page=>{
     await page.goto(base);
@@ -123,6 +131,42 @@ try{
     await page.goto(base);await page.locator('#era').selectOption('1');
     assert.equal(await page.evaluate(key=>localStorage.getItem(key),STORAGE_KEY),'unreadable original');
     await page.locator('[data-action="recover-save"]').waitFor();
+  });
+  await run('History Back and Forward restore the route for the bare app URL',async page=>{
+    await page.goto(base);
+    await page.getByRole('link',{name:'Type library',exact:true}).click();
+    await page.goBack();
+    await page.locator('.pokemon-hero').waitFor();
+    assert.equal(page.url(),base);
+    await page.goForward();
+    await page.locator('.library-layout').waitFor();
+    assert.equal(page.url(),base+'#library');
+  });
+  await run('Skip and navigation links work by keyboard without advancing or losing the quiz',async page=>{
+    await page.goto(base);
+    await page.locator('[data-mode="attack"]').click();
+    const skip = page.getByRole('link',{name:'Skip to content'});
+    await skip.focus();
+    await page.keyboard.press('Enter');
+    assert.equal(await page.evaluate(()=>document.activeElement.id),'main');
+    assert.equal(page.url(),base+'#practice');
+    await page.reload();
+    await page.locator('.battle-panel').waitFor();
+    await correctAnswer(page);
+    await skip.focus();
+    await page.keyboard.press('Enter');
+    assert.equal(await page.evaluate(()=>document.activeElement.id),'main');
+    assert.equal((await session(page)).index,0);
+    assert.equal((await session(page)).answers.length,1);
+    await page.getByRole('link',{name:'Type library',exact:true}).focus();
+    await page.keyboard.press('Enter');
+    const leavePrompt = page.getByRole('dialog');
+    await leavePrompt.getByRole('button',{name:'Keep practicing'}).click();
+    assert.equal((await session(page)).index,0);
+    await page.goBack();
+    await leavePrompt.getByRole('button',{name:'Leave session'}).click();
+    await page.locator('.pokemon-hero').waitFor();
+    assert.equal(await page.evaluate(()=>location.hash),'');
   });
   await run('Keyboard flow and interrupted lessons resume without replaying answers',async page=>{
     await startLesson(page);

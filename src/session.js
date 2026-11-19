@@ -8,8 +8,13 @@ import {availablePokemon, pokemonTypes} from './pokemon.js';
 export const SESSION_KEY = 'type-dojo-session-v1';
 const modes = ['lesson','attack','defense','immunity','dual','review','challenge','focus','moves','daily'];
 
-export function makeSession(mode, era, questions, lesson = null, focusType = null) {
-  return {dailyDay:mode==='daily'?dayKey():null,mode, era, questions, lesson, focusType, index:0, answers:[], hint:false, answered:false, finalized:false};
+export function makeSession(mode, era, questions, lesson = null, focusType = null, dailyDay = null) {
+  return {dailyDay, mode, era, questions, lesson, focusType, index:0, answers:[], hint:false, answered:false, finalized:false};
+}
+
+export function makeDailySession(era, now = Date.now()) {
+  const day = dayKey(now);
+  return makeSession('daily', era, dailyQuestions(era, day), null, null, day);
 }
 
 // Completion belongs to the final answer, not to the results-screen button.
@@ -70,5 +75,5 @@ export function restoreSession(value) {
     return {value:a.value, correct:a.value === q.value, assisted:a.assisted};
   });
   if (finalized !== (answers.length === questions.length)) throw new Error('Invalid completion state.');
-  return {...makeSession(mode,era,questions,lesson?.id || null,value.focusType || null), dailyDay:mode==='daily'?value.dailyDay:null,index, answered, hint, finalized, answers};
+  return {...makeSession(mode,era,questions,lesson?.id || null,value.focusType || null,mode==='daily'?value.dailyDay:null), index, answered, hint, finalized, answers};
 }

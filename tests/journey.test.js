@@ -2,14 +2,15 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {dayKey,dailyQuestions,evolutionStage,evolvedBuddy,dailyShare} from '../src/journey.js';
 import {freshState,validateState,resetProgress,restoreProgress} from '../src/progress.js';
-import {makeSession,restoreSession,finalizeSession} from '../src/session.js';
+import {makeDailySession,restoreSession,finalizeSession} from '../src/session.js';
 import {typesFor,LESSONS} from '../src/data.js';
 test('Daily gym is deterministic, era legal, varied, and independent of timezone',()=>{
  for(const era of ['1','2','6'])for(const day of ['2026-11-16','2026-11-17']){
   const qs=dailyQuestions(era,day);assert.deepEqual(qs,dailyQuestions(era,day));assert.equal(qs.length,5);
   assert.deepEqual(qs.filter(q=>q.ds.length===1).map(q=>q.value).sort(),[0,.5,1,2].sort());
   for(const q of qs)assert.ok([q.a,...q.ds].every(t=>typesFor(era).includes(t)));
-  const s=makeSession('daily',era,qs);s.dailyDay=day;assert.deepEqual(restoreSession(s),s);
+  const s=makeDailySession(era,Date.parse(day+'T23:59:59.999Z'));
+  assert.equal(s.dailyDay,day);assert.deepEqual(s.questions,qs);assert.deepEqual(restoreSession(s),s);
  }
  assert.notDeepEqual(dailyQuestions('6','2026-11-16'),dailyQuestions('6','2026-11-17'));
  assert.equal(dayKey(Date.parse('2026-11-16T23:59:59Z')),'2026-11-16');
@@ -17,7 +18,7 @@ test('Daily gym is deterministic, era legal, varied, and independent of timezone
  assert.throws(()=>dailyQuestions('6','2026-02-30'));
 });
 test('Daily first score survives replay, reload, export, reset and undo',()=>{
- const state=freshState(),b=state.eras['6'],s=makeSession('daily','6',dailyQuestions('6',dayKey()));
+ const state=freshState(),b=state.eras['6'],s=makeDailySession('6');
  s.answers=s.questions.map(q=>({value:q.value,correct:true,assisted:false}));s.index=4;s.answered=true;
  finalizeSession(s,b);assert.equal(b.daily[s.dailyDay],5);assert.equal(restoreSession(s).finalized,true);
  s.finalized=false;s.answers=s.answers.map(a=>({...a,correct:false}));finalizeSession(s,b);assert.equal(b.daily[s.dailyDay],5);
@@ -35,7 +36,7 @@ test('Starter evolution requires lessons and recall, and earned stages do not re
 });
 
 test('Daily snapshots reject changed questions, hinted answers and invalid dates',()=>{
- const s=makeSession('daily','6',dailyQuestions('6',dayKey()));
+ const s=makeDailySession('6');
  const bad=structuredClone(s);bad.questions[0].a=bad.questions[0].a==='Water'?'Fire':'Water';assert.throws(()=>restoreSession(bad));
  s.answers=[{value:s.questions[0].value,correct:true,assisted:true}];s.answered=true;assert.throws(()=>restoreSession(s));
  s.dailyDay='invalid';assert.throws(()=>restoreSession(s));
